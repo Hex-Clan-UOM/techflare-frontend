@@ -6,7 +6,7 @@ This web app allows the users to participate in discussions related to their fie
 
 ## Tech Stack
 
-**Server:** Node, Express, MongoDB
+**Client:** React, Redux
 
 ## Run Locally
 
@@ -28,27 +28,12 @@ Install dependencies
   npm install
 ```
 
-Start the server
+Start the client
 
 ```bash
-  npm run start
-  npm run dev
+  npm start
 
 ```
-
-## Running test
-
-```bash
-  npm run test
-```
-
-## Environment Variables
-
-To run this project, you will need to add the following environment variables to your .env file
-
-`PORT`
-
-`NODE_ENV`
 
 ## Authors
 
