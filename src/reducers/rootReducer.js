@@ -1,8 +1,6 @@
-const initState={
-    posts:[]
-}
 
-const rootReducer = (state = initState,action) =>{
+
+const rootReducer = (state ,action) =>{
     return state;
 }
 
