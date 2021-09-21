@@ -4,10 +4,10 @@ import loginImage from '../Images/loginImage.svg';
 
 const LoginPage=()=>{
 
-    const paperStyle={align:'left',padding :50,height:450,width:350, margin:"12% 12%", backgroundcolor:"#E5E5E5"}
+    const paperStyle={align:'left',padding :50,height:450,width:350, margin:"12% 12%", backgroundcolor:"#E5E5E5",backgroundImage: `url(${loginImage})`}
     const btnstyle={margin:'10px 0'}
     return(
-        <Grid >
+        
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center' >
                     <h1>Write-Out</h1>
@@ -18,7 +18,7 @@ const LoginPage=()=>{
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Continue with Google</Button>
             </Paper>
             
-        </Grid>
+       
     )
 }
 
