@@ -1,17 +1,12 @@
 import { applyMiddleware, createStore } from "redux";
-import rootReducer from "./Reducer/rootReducer";
+import rootReducer from "../Reducer/index";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-
-const initState = {
-  message: "hello",
-};
 
 const middleware = [thunk];
 
 const store = createStore(
   rootReducer,
-  initState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
 

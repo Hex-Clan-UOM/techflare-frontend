@@ -1,37 +1,19 @@
 import React from "react";
 import { Grid, Paper, Typography } from "@material-ui/core";
-import loginImage from "../../Assets/login_bg.png";
 
 import LoginBtn from "./LoginButton/index";
 
+import useStyles from "./style";
+
 const LoginPage = () => {
-  const paperStyle = {
-    align: "left",
-    padding: 20,
-    // height: "100%",
-    width: 450,
-    marginLeft: "2%",
-    marginTop: "10%",
-    marginBottom: "12%",
-    backgroundcolor: "#E5E5E5",
-    borderRadius: "15px",
-  };
+  const classes = useStyles();
 
-  const gridItemStyle = {
-    padding: 20,
-  };
-
-  const gridStyle = {
-    display: "flex",
-    height: "100vh",
-    background: `url(${loginImage}) center/cover no-repeat`,
-  };
   return (
     // <Container style={gridStyle} maxWidth="lg">
 
-    <Grid container style={gridStyle}>
-      <Grid item style={paperStyle} xs={12} sm={6} md={4} lg={4}>
-        <Paper elevation={1} style={gridItemStyle}>
+    <Grid container className={classes.gridStyle}>
+      <Grid item className={classes.paper} xs={12} sm={6} md={4} lg={4}>
+        <Paper elevation={1} className={classes.paper}>
           <Grid align="center">
             <Typography variant="h3" gutterBottom>
               Write Out
