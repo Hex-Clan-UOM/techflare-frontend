@@ -2,6 +2,7 @@ import React from "react";
 import { GoogleLogin } from "react-google-login";
 import { useHistory } from "react-router-dom";
 import { Typography, Button } from "@material-ui/core";
+import useStyles from "./style";
 
 function LoginBtn() {
   const history = useHistory();
@@ -12,14 +13,8 @@ function LoginBtn() {
   const FailureResponseGoogle = (response) => {
     console.log(response);
   };
-  const btnstyle = {
-    margin: "10px 0",
-    color: "#fff",
-    background: "#2D4059",
-    borderRadius: "5px",
-    padding: "3%",
-  };
 
+  const classes = useStyles();
   // console.log(process.env.REACT_APP_CLIENT_ID);
   return (
     <GoogleLogin
@@ -30,7 +25,7 @@ function LoginBtn() {
       render={(renderProps) => (
         <Button
           onClick={renderProps.onClick}
-          style={btnstyle}
+          className={classes.btnstyle}
           variant="contained"
         >
           <Typography>Login With Google</Typography>
