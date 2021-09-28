@@ -8,7 +8,7 @@ import { googleOAuth2 } from "../../../Actions/loginAction";
 import useStyles from "./style";
 
 const LoginBtn = ({ dispatch, isSignedIn, userId }) => {
-  const history = useHistory();
+  let history = useHistory();
 
   const SuccessResponseGoogle = (response) => {
     dispatch(googleOAuth2(response.tokenObj.access_token));
