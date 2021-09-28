@@ -11,7 +11,7 @@ const LoginBtn = ({ dispatch, isSignedIn, userId }) => {
   const history = useHistory();
 
   const SuccessResponseGoogle = (response) => {
-    dispatch(googleOAuth2(response.tokenObj.access_token));
+    dispatch(googleOAuth2(response.tokenId));
     history.push("/home");
   };
   const FailureResponseGoogle = (response) => {
