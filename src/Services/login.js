@@ -1,5 +1,10 @@
 import axios from "axios";
-import { loginRequest, loginSuccess, loginFail } from "../Actions/loginAction";
+import {
+  loginRequest,
+  loginSuccess,
+  loginFail,
+  logoutRequest,
+} from "../Actions/loginAction";
 
 export const login = (IDToken) => async (dispatch) => {
   try {
@@ -21,4 +26,9 @@ export const login = (IDToken) => async (dispatch) => {
   } catch (error) {
     dispatch(loginFail(error));
   }
+};
+
+export const logout = () => async (dispatch) => {
+  localStorage.removeItem("userInfo");
+  dispatch(logoutRequest());
 };
