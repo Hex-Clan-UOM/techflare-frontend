@@ -1,11 +1,34 @@
-import { GOOGLE_OAUTH2 } from "./Types/login";
+import {
+  USER_LOGIN_FAIL,
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+  USER_LOGOUT,
+} from "../Actions/Types/login";
 
-export const googleOAuth2 = (userId, userName, userProfile) => {
-  console.log(userId);
+export const loginRequest = () => {
   return {
-    type: GOOGLE_OAUTH2,
-    payload: userId,
-    payload1: userName,
-    payload2: userProfile,
+    type: USER_LOGIN_REQUEST,
+  };
+};
+
+export const loginSuccess = (data) => {
+  return {
+    type: USER_LOGIN_SUCCESS,
+    payload: data,
+  };
+};
+export const loginFail = (error) => {
+  return {
+    type: USER_LOGIN_FAIL,
+    payload:
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+  };
+};
+
+export const logoutRequest = () => {
+  return {
+    type: USER_LOGOUT,
   };
 };

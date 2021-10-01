@@ -1,23 +1,20 @@
-import { GOOGLE_OAUTH2 } from "../Actions/Types/login";
+import {
+  USER_LOGIN_FAIL,
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+  USER_LOGOUT,
+} from "../Actions/Types/login";
 
-const initialState = {
-  isSignedIn: null,
-  userId: null,
-  userName: null,
-  userProfile: null,
-};
-
-export const loginReducer = (state = initialState, action) => {
+export const userLoginReducer = (state = {}, action) => {
   switch (action.type) {
-    case GOOGLE_OAUTH2: {
-      return {
-        ...state,
-        isSignedIn: true,
-        userId: action.payload,
-        userName: action.payload1,
-        userProfile: action.payload2,
-      };
-    }
+    case USER_LOGIN_REQUEST:
+      return { loading: true };
+    case USER_LOGIN_SUCCESS:
+      return { loading: false, userInfo: action.payload };
+    case USER_LOGIN_FAIL:
+      return { loading: false, error: action.payload };
+    case USER_LOGOUT:
+      return {};
     default:
       return state;
   }

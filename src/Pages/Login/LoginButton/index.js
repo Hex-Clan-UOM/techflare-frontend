@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { GoogleLogin } from "react-google-login";
 import { useHistory } from "react-router-dom";
 import { Typography, Button } from "@material-ui/core";
@@ -6,19 +6,16 @@ import { connect } from "react-redux";
 
 import { googleOAuth2 } from "../../../Actions/loginAction";
 import useStyles from "./style";
+import { login } from "../../../Services/login";
+import { useDispatch, useSelector } from "react-redux";
 
-const LoginBtn = ({ dispatch, isSignedIn, userId }) => {
+const LoginBtn = () => {
   let history = useHistory();
+  const dispatch = useDispatch();
 
   const SuccessResponseGoogle = (response) => {
-    dispatch(
-      googleOAuth2(
-        response.tokenId,
-        response.profileObj.givenName,
-        response.profileObj.imageUrl
-      )
-    );
-    console.log(response);
+    dispatch(login(response.tokenId));
+    console.log(response.tokenId);
     history.push("/home");
   };
   const FailureResponseGoogle = (response) => {
@@ -46,13 +43,13 @@ const LoginBtn = ({ dispatch, isSignedIn, userId }) => {
   );
 };
 
-function mapStateToProps(state) {
+/*function mapStateToProps(state) {
   return {
     isSignedIn: state.login.isSignedIn,
     userId: state.login.userId,
     userName: state.login.userName,
     userProfile: state.login.userProfile,
   };
-}
+}*/
 
-export default connect(mapStateToProps)(LoginBtn);
+export default LoginBtn;

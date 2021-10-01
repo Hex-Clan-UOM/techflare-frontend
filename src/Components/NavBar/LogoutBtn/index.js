@@ -6,28 +6,34 @@ import Button from "@mui/material/Button";
 import { GoogleLogout } from "react-google-login";
 import { useHistory } from "react-router-dom";
 import useStyles from "./style";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../Services/login";
 
 function LogoutBtn() {
   let history = useHistory();
-  const logout = () => {
-    console.log("logout");
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
     history.push("/");
   };
   const classes = useStyles();
   return (
-    <GoogleLogout
-      clientId={process.env.REACT_APP_CLIENT_ID}
-      onLogoutSuccess={logout}
-      render={(renderProps) => (
-        <Button
-          onClick={renderProps.onClick}
-          variant="contained"
-          className={classes.btnstyle}
-        >
-          <Typography>Log Out</Typography>
-        </Button>
-      )}
-    />
+    <div>
+      <GoogleLogout
+        clientId={process.env.REACT_APP_CLIENT_ID}
+        onLogoutSuccess={handleLogout}
+        render={(renderProps) => (
+          <Button
+            onClick={renderProps.onClick}
+            className={classes.btnstyle}
+            variant="contained"
+          >
+            <Typography>Log Out</Typography>
+          </Button>
+        )}
+      />
+    </div>
   );
 }
 

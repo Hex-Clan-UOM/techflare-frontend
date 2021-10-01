@@ -1,16 +1,16 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import LoginPage from "../../Pages/Login";
-import store from "../../Store/initialStore";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const state = store.getState();
-  console.log(state);
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (state.login.isSignedIn) {
+        if (userInfo !== null) {
           return <Component {...props} />;
         } else {
           return <Redirect to="/" component={LoginPage} />;
