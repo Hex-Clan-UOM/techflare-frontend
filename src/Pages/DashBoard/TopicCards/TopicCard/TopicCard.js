@@ -14,10 +14,12 @@ const useStyles = makeStyles({});
 
 function TopicCard() {
   return (
-    <Card>
-      <CardHeader avatar={<Avatar src={sample1} />} title="Jhon">
-        <Typography>Topic 1</Typography>
-      </CardHeader>
+    <Card sx={{ mb: 2 }}>
+      <CardHeader
+        avatar={<Avatar src={sample1} />}
+        title="Title 1"
+        subheader="jhon"
+      ></CardHeader>
       <CardContent>
         <Typography>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed possimus

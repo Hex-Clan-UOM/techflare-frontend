@@ -7,6 +7,8 @@ function index() {
     <div>
       <Container sx={{ mt: 2 }}>
         <TopicCard />
+        <TopicCard />
+        <TopicCard />
       </Container>
     </div>
   );
