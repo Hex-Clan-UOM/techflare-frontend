@@ -5,21 +5,21 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import LogoutBtn from "./LogoutBtn";
-import sample from "../../Assets/login_bg.png";
 import { Typography } from "@mui/material";
-import store from "../../Store/initialStore";
+import { useSelector } from "react-redux";
 
-function index() {
-  const state = store.getState();
+const Index = () => {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Avatar src={state.login.userProfile} sx={{ mr: 2 }} />
-          <Typography sx={{ flexGrow: 1 }}>
-            Hi, {state.login.userName} !
-          </Typography>
+          {userInfo && <Avatar src={userInfo.avatar} sx={{ mr: 2 }} />}
+          {userInfo && (
+            <Typography sx={{ flexGrow: 1 }}>{userInfo.firstName}</Typography>
+          )}
           <Button variant="contained" sx={{ mr: 2 }}>
             <Typography>Create Topics</Typography>
           </Button>
@@ -28,6 +28,6 @@ function index() {
       </AppBar>
     </Box>
   );
-}
+};
 
-export default index;
+export default Index;
