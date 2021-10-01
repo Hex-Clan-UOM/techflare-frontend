@@ -10,7 +10,11 @@ export const login = (idToken) => async (dispatch) => {
       },
     };
     console.log(idToken);
-    const { data } = await axios.post("/login", idToken, config);
+    const { data } = await axios.post(
+      "http://localhost:5000/login",
+      idToken,
+      config
+    );
 
     dispatch(loginSuccess(data));
 

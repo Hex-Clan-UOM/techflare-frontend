@@ -13,7 +13,7 @@ const LoginBtn = () => {
   let history = useHistory();
   const dispatch = useDispatch();
 
-  const SuccessResponseGoogle = (response) => {
+  const ResponseGoogle = (response) => {
     dispatch(login(response.tokenId));
     console.log(response.tokenId);
     history.push("/home");
@@ -27,8 +27,8 @@ const LoginBtn = () => {
   return (
     <GoogleLogin
       clientId={process.env.REACT_APP_CLIENT_ID}
-      onSuccess={SuccessResponseGoogle}
-      onFailure={FailureResponseGoogle}
+      onSuccess={ResponseGoogle}
+      onFailure={ResponseGoogle}
       buttonText="SignUp with Google"
       render={(renderProps) => (
         <Button
