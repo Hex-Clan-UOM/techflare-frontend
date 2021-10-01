@@ -1,5 +1,5 @@
 import axios from "axios";
-import { loginRequest } from "../Actions/loginAction";
+import { loginRequest, loginSuccess, loginFail } from "../Actions/loginAction";
 export const login = (idToken) => async (dispatch) => {
   try {
     dispatch(loginRequest());
