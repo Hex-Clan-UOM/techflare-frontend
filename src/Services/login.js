@@ -1,20 +1,23 @@
 import axios from "axios";
 import { loginRequest, loginSuccess, loginFail } from "../Actions/loginAction";
-export const login = (idToken) => async (dispatch) => {
+
+export const login = (IDToken) => async (dispatch) => {
   try {
     dispatch(loginRequest());
-
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    console.log(idToken);
-    const { data } = await axios.post("/login", idToken, config);
+    const { data } = await axios.post(
+      "http://localhost:5000/login",
+      { idToken: IDToken },
+      { withCredentials: true },
+      config
+    );
+    dispatch(loginSuccess(data.user));
 
-    dispatch(loginSuccess(data));
-
-    localStorage.setItem("userInfo", JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data.user));
   } catch (error) {
     dispatch(loginFail(error));
   }
