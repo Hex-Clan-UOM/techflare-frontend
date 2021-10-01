@@ -11,10 +11,10 @@ export const loginRequest = () => {
   };
 };
 
-export const loginSuccess = (userinfo) => {
+export const loginSuccess = (data) => {
   return {
     type: USER_LOGIN_SUCCESS,
-    payload: userInfo,
+    payload: data,
   };
 };
 export const loginFail = (error) => {
