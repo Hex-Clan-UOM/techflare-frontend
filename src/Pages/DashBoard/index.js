@@ -1,13 +1,14 @@
 import React from "react";
 import Navbar from "../../Components/NavBar/index";
+import TopicCards from "./TopicCards/index";
 
-function HomePage() {
+function DashBoard() {
   return (
     <>
       <Navbar />
-      <div>This is the home page</div>
+      <TopicCards />
     </>
   );
 }
 
-export default HomePage;
+export default DashBoard;

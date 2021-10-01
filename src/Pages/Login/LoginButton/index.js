@@ -3,7 +3,7 @@ import { GoogleLogin } from "react-google-login";
 import { useHistory } from "react-router-dom";
 import { Typography, Button } from "@material-ui/core";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+
 import { googleOAuth2 } from "../../../Actions/loginAction";
 import useStyles from "./style";
 import { login } from "../../../Services/login";
@@ -47,6 +47,8 @@ const LoginBtn = () => {
   return {
     isSignedIn: state.login.isSignedIn,
     userId: state.login.userId,
+    userName: state.login.userName,
+    userProfile: state.login.userProfile,
   };
 }*/
 
