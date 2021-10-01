@@ -18,7 +18,7 @@ function index() {
         <Toolbar>
           <Avatar src={state.login.userProfile} sx={{ mr: 2 }} />
           <Typography sx={{ flexGrow: 1 }}>
-            Hi, {state.login.userName}
+            Hi, {state.login.userName} !
           </Typography>
           <Button variant="contained" sx={{ mr: 2 }}>
             <Typography>Create Topics</Typography>
