@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { googleOAuth2 } from "../../../Actions/loginAction";
 import useStyles from "./style";
-import { login } from "../../../Actions/loginAction";
+import { login } from "../../../Services/login";
 import { useDispatch, useSelector } from "react-redux";
 
 const LoginBtn = () => {
