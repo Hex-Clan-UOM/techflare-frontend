@@ -26,16 +26,9 @@ export const loginFail = (error) => {
         : error.message,
   };
 };
-/*export const googleOAuth2= () => (dispatch) => {}
-export const fetchDocuments = () => async(dispatch) => {
-    dispatch(isLoadingAllDocuments(true));
 
-    const response = await axios.get('/api/v1/documents');
-
-    if (response.error) {
-		dispatch(showError(messages.documentsFetchError));
-	} else {
-		dispatch(setAllDocuments(response));
-	}
-    dispatch(isLoadingAllDocuments(false));
-}*/
+export const logoutRequest = () => {
+  return {
+    type: USER_LOGOUT,
+  };
+};

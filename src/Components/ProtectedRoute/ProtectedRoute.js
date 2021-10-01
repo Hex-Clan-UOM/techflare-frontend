@@ -10,7 +10,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => {
-        if (userInfo) {
+        if (userInfo !== null) {
           return <Component {...props} />;
         } else {
           return <Redirect to="/" component={LoginPage} />;
