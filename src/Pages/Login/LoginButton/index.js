@@ -11,7 +11,13 @@ const LoginBtn = ({ dispatch, isSignedIn, userId }) => {
   let history = useHistory();
 
   const SuccessResponseGoogle = (response) => {
-    dispatch(googleOAuth2(response.tokenObj.access_token));
+    dispatch(
+      googleOAuth2(
+        response.tokenId,
+        response.profileObj.givenName,
+        response.profileObj.imageUrl
+      )
+    );
     console.log(response);
     history.push("/home");
   };
@@ -44,6 +50,8 @@ function mapStateToProps(state) {
   return {
     isSignedIn: state.login.isSignedIn,
     userId: state.login.userId,
+    userName: state.login.userName,
+    userProfile: state.login.userProfile,
   };
 }
 
