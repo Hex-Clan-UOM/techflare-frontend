@@ -3,7 +3,7 @@ import { GoogleLogin } from "react-google-login";
 import { useHistory } from "react-router-dom";
 import { Typography, Button } from "@material-ui/core";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+
 import { googleOAuth2 } from "../../../Actions/loginAction";
 import useStyles from "./style";
 
@@ -12,6 +12,7 @@ const LoginBtn = ({ dispatch, isSignedIn, userId }) => {
 
   const SuccessResponseGoogle = (response) => {
     dispatch(googleOAuth2(response.tokenObj.access_token));
+    console.log(response);
     history.push("/home");
   };
   const FailureResponseGoogle = (response) => {

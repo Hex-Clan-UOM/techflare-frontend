@@ -15,21 +15,19 @@ function LogoutBtn() {
   };
   const classes = useStyles();
   return (
-    <div>
-      <GoogleLogout
-        clientId={process.env.REACT_APP_CLIENT_ID}
-        onLogoutSuccess={logout}
-        render={(renderProps) => (
-          <Button
-            onClick={renderProps.onClick}
-            className={classes.btnstyle}
-            variant="contained"
-          >
-            <Typography>Log Out</Typography>
-          </Button>
-        )}
-      />
-    </div>
+    <GoogleLogout
+      clientId={process.env.REACT_APP_CLIENT_ID}
+      onLogoutSuccess={logout}
+      render={(renderProps) => (
+        <Button
+          onClick={renderProps.onClick}
+          variant="contained"
+          className={classes.btnstyle}
+        >
+          <Typography>Log Out</Typography>
+        </Button>
+      )}
+    />
   );
 }
 

@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import LoginPage from "../../Pages/Login";
 import store from "../../Store/initialStore";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const [isLogin, setisLogin] = useState(true);
   const state = store.getState();
   console.log(state);
   return (
