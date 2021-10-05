@@ -6,27 +6,27 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import sample1 from "../../../../Assets/login_bg.png";
+import useStyles from "./style";
 
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles({});
-
-function TopicCard() {
+function TopicCard({ title, author, avatar, description, date }) {
+  const classes = useStyles();
   return (
-    <Card sx={{ mb: 2 }}>
+    <Card sx={{ mb: 2 }} className={classes.root}>
       <CardHeader
-        avatar={<Avatar src={sample1} />}
-        title="Title 1"
-        subheader="jhon"
-      ></CardHeader>
-      <CardContent>
-        <Typography>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed possimus
-          porro repellat quod nulla, iusto quasi non, animi alias magni
-          consequuntur suscipit iste illum fugit optio quisquam in. Distinctio,
-          quo.
-        </Typography>
+        avatar={<Avatar src={avatar} />}
+        title={<Typography variant="subtitle1">{author}</Typography>}
+        action={
+          <Typography variant="h6" align="left">
+            {title}
+          </Typography>
+        }
+        subheader={<Typography varinat="subtitle2">{date}</Typography>}
+        className={classes.header}
+      >
+        <p>hello</p>
+      </CardHeader>
+      <CardContent className={classes.content}>
+        <Typography>{description}</Typography>
       </CardContent>
     </Card>
   );

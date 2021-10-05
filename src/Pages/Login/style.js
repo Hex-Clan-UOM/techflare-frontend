@@ -4,11 +4,10 @@ const useStyles = makeStyles(() => ({
   paper: {
     align: "left",
     padding: 20,
-    // height: "100%",
-    width: 450,
+    maxHeight: "80%",
+    maxWidth: "100%",
     marginLeft: "2%",
-    marginTop: "10%",
-    marginBottom: "12%",
+    marginTop: "20%",
     backgroundcolor: "#E5E5E5",
     borderRadius: "15px",
   },
@@ -19,6 +18,17 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     height: "100vh",
     background: `url(${loginImage}) center/cover no-repeat`,
+  },
+  avatar: {
+    maxWidth: "80%",
+    height: "auto",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: 10,
+  },
+  moto: {
+    color: "#2D4059",
   },
 }));
 
