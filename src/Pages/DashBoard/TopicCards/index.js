@@ -1,8 +1,16 @@
 import { Container } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import TopicCard from "./TopicCard/TopicCard";
+import { useDispatch, useSelector } from "react-redux";
+import { listPosts } from "../../../Services/fetchPosts";
 
-function index() {
+const Index = () => {
+  const dispatch = useDispatch();
+  const postLists = useSelector((state) => state.fetchPost);
+  const { loading, error, posts } = postLists;
+  useEffect(() => {
+    dispatch(listPosts());
+  }, [dispatch]);
   return (
     <div>
       <Container sx={{ mt: 2 }}>
@@ -12,6 +20,6 @@ function index() {
       </Container>
     </div>
   );
-}
+};
 
-export default index;
+export default Index;
