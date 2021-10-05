@@ -22,9 +22,7 @@ function TopicCard({ title, author, avatar, description, date }) {
         }
         subheader={<Typography varinat="subtitle2">{date}</Typography>}
         className={classes.header}
-      >
-        <p>hello</p>
-      </CardHeader>
+      />
       <CardContent className={classes.content}>
         <Typography>{description}</Typography>
       </CardContent>

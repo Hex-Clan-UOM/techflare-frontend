@@ -15,7 +15,7 @@ export const login = (IDToken) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "http://localhost:5000/login",
+      `${process.env.REACT_APP_URL}/login`,
       { idToken: IDToken },
       { withCredentials: true },
       config

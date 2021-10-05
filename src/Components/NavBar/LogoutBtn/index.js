@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import useStyles from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../Services/login";
+import RoundedBorderBtn from "../../RoundedBorderBtn/RoundedBorderBtn";
 
 function LogoutBtn() {
   let history = useHistory();
@@ -19,21 +20,20 @@ function LogoutBtn() {
   };
   const classes = useStyles();
   return (
-    <div>
-      <GoogleLogout
-        clientId={process.env.REACT_APP_CLIENT_ID}
-        onLogoutSuccess={handleLogout}
-        render={(renderProps) => (
-          <Button
-            onClick={renderProps.onClick}
-            className={classes.btnstyle}
-            variant="contained"
-          >
-            <Typography>Log Out</Typography>
-          </Button>
-        )}
-      />
-    </div>
+    <GoogleLogout
+      clientId={process.env.REACT_APP_CLIENT_ID}
+      onLogoutSuccess={handleLogout}
+      render={(renderProps) => (
+        // <Button
+        //   onClick={renderProps.onClick}
+        //   className={classes.btnstyle}
+        //   variant="contained"
+        // >
+        //   <Typography>Log Out</Typography>
+        // </Button>
+        <RoundedBorderBtn btnText="Log out" onClick={renderProps.onClick} />
+      )}
+    />
   );
 }
 

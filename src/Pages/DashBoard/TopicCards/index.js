@@ -2,7 +2,11 @@ import { Container, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Spinner from "../../../Components/Spinner/Spinner";
 import Searchbar from "../Searchbar/Searchbar";
+
 import TopicCard from "./TopicCard/TopicCard";
+import { useDispatch, useSelector } from "react-redux";
+import { listPosts } from "../../../Services/fetchPosts";
+import { PostAddSharp } from "@material-ui/icons";
 
 const Topics = [
   {
@@ -12,6 +16,38 @@ const Topics = [
     description:
       " Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum at minima reprehenderit autem iure delectus! Dolorem, perspiciatis voluptatibus minus, ipsum sequi fuga esse atque fugit, laborum neque modi sed.",
     date: "12/06/2020",
+  },
+  {
+    title: "Title 2",
+    author: "Mathew",
+    avatar: "../../../../Assets/login_bg.png",
+    description:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum at minima reprehenderit autem",
+    date: "12/06/2021",
+  },
+  {
+    title: "Title 3",
+    author: "Philips",
+    avatar: "../../../../Assets/login_bg.png",
+    description:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum at minima reprehenderit autem",
+    date: "12/07/2020",
+  },
+  {
+    title: "Title 2",
+    author: "Mathew",
+    avatar: "../../../../Assets/login_bg.png",
+    description:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum at minima reprehenderit autem",
+    date: "12/06/2021",
+  },
+  {
+    title: "Title 3",
+    author: "Philips",
+    avatar: "../../../../Assets/login_bg.png",
+    description:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum at minima reprehenderit autem",
+    date: "12/07/2020",
   },
   {
     title: "Title 2",
@@ -40,6 +76,14 @@ function TopicCards() {
   }, []);
 
   const [loading, setloading] = useState(true);
+  const dispatch = useDispatch();
+  const postLists = useSelector((state) => state.fetchPost);
+  // const { loading, error, posts } = postLists;
+  const { posts } = postLists;
+
+  useEffect(() => {
+    dispatch(listPosts());
+  }, [dispatch]);
 
   return (
     <div>
@@ -62,6 +106,16 @@ function TopicCards() {
             ))}
           </div>
         )}
+        {posts.map((post) => {
+          console.log(post);
+          console.log("hello");
+        })}
+
+        {/* <div>
+      <Container sx={{ mt: 2 }}>
+        {loading && "loading"}
+        {!loading &&
+          posts.map((post) => <TopicCard topic={post} key={post._id} />)} */}
       </Container>
     </div>
   );

@@ -7,6 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import LogoutBtn from "./LogoutBtn";
 import { Typography } from "@mui/material";
 import { useSelector } from "react-redux";
+import RoundedBorderBtn from "../RoundedBorderBtn/RoundedBorderBtn";
 
 const Index = () => {
   const userLogin = useSelector((state) => state.userLogin);
@@ -20,9 +21,11 @@ const Index = () => {
           {userInfo && (
             <Typography sx={{ flexGrow: 1 }}>{userInfo.firstName}</Typography>
           )}
-          <Button variant="contained" sx={{ mr: 2 }}>
-            <Typography>Create Topics</Typography>
-          </Button>
+
+          <RoundedBorderBtn
+            btnText="Create Topics"
+            onClick={console.log("clicked")}
+          />
           <LogoutBtn />
         </Toolbar>
       </AppBar>
