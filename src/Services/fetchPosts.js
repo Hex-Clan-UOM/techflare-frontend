@@ -6,8 +6,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 export const listPosts = () => async (dispatch) => {
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const userInfo = localStorage.getItem("userInfo");
   try {
     dispatch(listPostRequest());
     const config = {
