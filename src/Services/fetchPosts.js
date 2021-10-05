@@ -5,24 +5,27 @@ import {
 } from "../Actions/postAction";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+
 export const listPosts = () => async (dispatch) => {
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  // const userLogin = useSelector((state) => state.userLogin);
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const { accessToken } = userInfo;
   try {
     dispatch(listPostRequest());
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: userInfo.accessToken,
+        Authorization: accessToken,
       },
     };
+    console.log(config);
     const { data } = await axios.get(
       `${process.env.REACT_APP_URL}/posts`,
-      { withCredentials: true },
       config
     );
+    console.log(data);
 
-    dispatch(listPostSuccess(data.posts));
+    dispatch(listPostSuccess(data));
   } catch (error) {
     dispatch(listPostFail(error));
   }
