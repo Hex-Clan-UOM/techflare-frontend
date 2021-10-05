@@ -3,7 +3,6 @@ import {
   listPostRequest,
   listPostSuccess,
 } from "../Actions/postAction";
-import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 export const listPosts = () => async (dispatch) => {
