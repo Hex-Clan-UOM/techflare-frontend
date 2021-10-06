@@ -17,7 +17,7 @@ export const listPosts = () => async (dispatch) => {
       },
     };
     const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/posts`,
+      `${process.env.REACT_APP_URL}/posts?skip=10&limit=10`,
       config
     );
 

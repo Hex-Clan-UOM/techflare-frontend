@@ -8,18 +8,20 @@ import LogoutBtn from "./LogoutBtn";
 import { Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import RoundedBorderBtn from "../RoundedBorderBtn/RoundedBorderBtn";
-
+import useStyles from "./style";
 const Index = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
+  const classes = useStyles();
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.root}>
         <Toolbar>
           {userInfo && <Avatar src={userInfo.avatar} sx={{ mr: 2 }} />}
           {userInfo && (
-            <Typography sx={{ flexGrow: 1 }}>{userInfo.firstName}</Typography>
+            <Typography sx={{ flexGrow: 1 }} className={classes.txt}>
+              Hi! {userInfo.firstName}
+            </Typography>
           )}
 
           <RoundedBorderBtn

@@ -7,7 +7,7 @@ import TopicCard from "./TopicCard/TopicCard";
 import { useDispatch, useSelector } from "react-redux";
 import { listPosts } from "../../../Services/fetchPosts";
 import { PostAddSharp } from "@material-ui/icons";
-
+import Pagination from "@mui/material/Pagination";
 const Topics = [
   {
     title: "Title 1",
@@ -79,7 +79,7 @@ function TopicCards() {
   const dispatch = useDispatch();
   const postLists = useSelector((state) => state.fetchPost);
   // const { loading, error, posts } = postLists;
-  const { posts } = postLists;
+  const { error, posts } = postLists;
 
   useEffect(() => {
     dispatch(listPosts());
@@ -106,6 +106,7 @@ function TopicCards() {
             ))}
           </div>
         )}
+        <Pagination count={5} onChange={console.log("change")} />
         {posts.map((post) => {
           console.log(post);
           console.log("hello");
