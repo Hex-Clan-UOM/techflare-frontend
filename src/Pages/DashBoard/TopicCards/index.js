@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Spinner from "../../../Components/Spinner/Spinner";
 import Searchbar from "../Searchbar/Searchbar";
@@ -6,84 +6,24 @@ import Searchbar from "../Searchbar/Searchbar";
 import TopicCard from "./TopicCard/TopicCard";
 import { useDispatch, useSelector } from "react-redux";
 import { listPosts } from "../../../Services/fetchPosts";
-import { PostAddSharp } from "@material-ui/icons";
+
 import Pagination from "@mui/material/Pagination";
-const Topics = [
-  {
-    title: "Title 1",
-    author: "Jhon",
-    avatar: "../../../../Assets/login_bg.png",
-    description:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum at minima reprehenderit autem iure delectus! Dolorem, perspiciatis voluptatibus minus, ipsum sequi fuga esse atque fugit, laborum neque modi sed.",
-    date: "12/06/2020",
-  },
-  {
-    title: "Title 2",
-    author: "Mathew",
-    avatar: "../../../../Assets/login_bg.png",
-    description:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum at minima reprehenderit autem",
-    date: "12/06/2021",
-  },
-  {
-    title: "Title 3",
-    author: "Philips",
-    avatar: "../../../../Assets/login_bg.png",
-    description:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum at minima reprehenderit autem",
-    date: "12/07/2020",
-  },
-  {
-    title: "Title 2",
-    author: "Mathew",
-    avatar: "../../../../Assets/login_bg.png",
-    description:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum at minima reprehenderit autem",
-    date: "12/06/2021",
-  },
-  {
-    title: "Title 3",
-    author: "Philips",
-    avatar: "../../../../Assets/login_bg.png",
-    description:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum at minima reprehenderit autem",
-    date: "12/07/2020",
-  },
-  {
-    title: "Title 2",
-    author: "Mathew",
-    avatar: "../../../../Assets/login_bg.png",
-    description:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum at minima reprehenderit autem",
-    date: "12/06/2021",
-  },
-  {
-    title: "Title 3",
-    author: "Philips",
-    avatar: "../../../../Assets/login_bg.png",
-    description:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum at minima reprehenderit autem",
-    date: "12/07/2020",
-  },
-];
 
 function TopicCards() {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setloading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const [loading, setloading] = useState(true);
   const dispatch = useDispatch();
   const postLists = useSelector((state) => state.fetchPost);
-  // const { loading, error, posts } = postLists;
-  const { error, posts } = postLists;
+  const { loading, error, posts } = postLists;
 
+  const [skip, setSkip] = useState(0);
   useEffect(() => {
-    dispatch(listPosts());
-  }, [dispatch]);
+    dispatch(listPosts(skip, 10));
+  }, [dispatch, skip]);
+
+  const handlePageChange = (event, value) => {
+    console.log(value);
+    setSkip((value - 1) * 10);
+    console.log(skip);
+  };
 
   return (
     <div>
@@ -93,30 +33,30 @@ function TopicCards() {
           <Spinner loading={loading} size={300} />
         ) : (
           <div>
-            {Topics.map((item) => (
-              <div>
+            {posts.map((item) => (
+              <div key={item._id}>
                 <TopicCard
-                  avatar={item.avatar}
-                  author={item.author}
+                  avatar={item.author.avatar}
+                  author={item.author.firstName}
                   title={item.title}
-                  description={item.description}
-                  date={item.date}
+                  description={item.body}
+                  date={item.createdAt}
                 />
               </div>
             ))}
           </div>
         )}
-        <Pagination count={5} onChange={console.log("change")} />
-        {posts.map((post) => {
-          console.log(post);
-          console.log("hello");
-        })}
-
-        {/* <div>
-      <Container sx={{ mt: 2 }}>
-        {loading && "loading"}
-        {!loading &&
-          posts.map((post) => <TopicCard topic={post} key={post._id} />)} */}
+        <div>
+          <Pagination
+            count={10}
+            onChange={handlePageChange}
+            siblingCount={1}
+            boundaryCount={1}
+            variant="outlined"
+            shape="rounded"
+            className="my-3"
+          />
+        </div>
       </Container>
     </div>
   );

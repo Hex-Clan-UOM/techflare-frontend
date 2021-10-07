@@ -5,7 +5,7 @@ import {
 } from "../Actions/postAction";
 import axios from "axios";
 
-export const listPosts = () => async (dispatch) => {
+export const listPosts = (skip, limit) => async (dispatch) => {
   // const userLogin = useSelector((state) => state.userLogin);
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   try {
@@ -16,13 +16,13 @@ export const listPosts = () => async (dispatch) => {
         Authorization: userInfo.accessToken,
       },
     };
+
     const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/posts?skip=10&limit=10`,
+      `${process.env.REACT_APP_URL}/posts?skip=${skip}&limit=${limit}`,
       config
     );
 
-    dispatch(listPostSuccess(data));
-    console.log(data);
+    dispatch(listPostSuccess(data.posts));
   } catch (error) {
     dispatch(listPostFail(error));
   }

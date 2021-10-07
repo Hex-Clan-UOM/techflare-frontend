@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "material-ui-search-bar";
 import useStyles from "./style";
+
 function Searchbar() {
+  // const { word } = this.state;
   const classes = useStyles();
   return (
     <SearchBar
-      //   value={this.state.value}
-      //   onChange={(newValue) => this.setState({ value: newValue })}
-      //   onRequestSearch={() => doSomethingWith(this.state.value)}
-      className={classes.root}
+    // value={word}
+    // //   onChange={(newValue) => this.setState({ value: newValue })}
+    // onRequestSearch={() => console.log(word)}
+    // className={classes.root}
     />
   );
 }
