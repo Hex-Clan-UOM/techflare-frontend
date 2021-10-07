@@ -1,13 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
-  btnstyle: {
-    margin: "5px 0",
-    color: "#000",
-    background: "#EDF6F9",
-    borderRadius: "8px",
-    marginLeft: 20,
+  root: {
+    background: "#2D4059",
+  },
+  txt: {
+    color: "#fff",
   },
 }));
-
 export default useStyles;
