@@ -25,7 +25,7 @@ export const listPosts = (skip, limit) => async (dispatch) => {
       config
     );
 
-    dispatch(listPostSuccess(data.posts));
+    dispatch(listPostSuccess(data));
   } catch (error) {
     dispatch(listPostFail(error));
   }
@@ -43,12 +43,12 @@ export const listFilteredPosts = (value, skip, limit) => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/posts/search?skip=${skip}&limit=${limit}`,
-      { value },
+      `${process.env.REACT_APP_URL}/posts/search?value=${value}&skip=${skip}&limit=${limit}`,
+
       config
     );
 
-    dispatch(listFilteredPostSuccess(data.posts));
+    dispatch(listFilteredPostSuccess(data));
   } catch (error) {
     dispatch(listFilteredPostFail(error));
   }

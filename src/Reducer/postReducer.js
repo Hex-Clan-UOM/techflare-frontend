@@ -4,7 +4,7 @@ import {
   POST_LIST_SUCCESS,
 } from "../Actions/Types/fetchPost";
 
-export const postListReducer = (state = { posts: [] }, action) => {
+export const postListReducer = (state = { posts: [], number: 0 }, action) => {
   switch (action.type) {
     case POST_LIST_REQUEST:
       return { loading: true, posts: [] };
@@ -12,6 +12,7 @@ export const postListReducer = (state = { posts: [] }, action) => {
       return {
         loading: false,
         posts: action.payload,
+        number: action.payload1,
       };
     case POST_LIST_FAIL:
       return { loading: false, error: action.payload };
