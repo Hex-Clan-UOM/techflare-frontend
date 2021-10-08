@@ -33,6 +33,7 @@ export const listPosts = (skip, limit) => async (dispatch) => {
 export const listFilteredPosts = (value, skip, limit) => async (dispatch) => {
   // const userLogin = useSelector((state) => state.userLogin);
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
   try {
     dispatch(listFilteredPostRequest());
     const config = {

@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
-  root: {
+  rootes: {
     margin: "5px 0",
     color: "#000",
     background: "#EDF6F9",
