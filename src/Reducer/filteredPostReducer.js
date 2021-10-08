@@ -10,7 +10,7 @@ export const FilteredPostListReducer = (
 ) => {
   switch (action.type) {
     case FILTERED_POST_LIST_REQUEST:
-      return { loading: true, posts: [] };
+      return { loading: true, filteredPosts: [] };
     case FILTERED_POST_LIST_SUCCESS:
       return {
         loading: false,
