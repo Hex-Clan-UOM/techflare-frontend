@@ -13,7 +13,8 @@ export const listPostRequest = () => {
 export const listPostSuccess = (data) => {
   return {
     type: POST_LIST_SUCCESS,
-    payload: data,
+    payload: data.posts,
+    payload1: data.number,
   };
 };
 
