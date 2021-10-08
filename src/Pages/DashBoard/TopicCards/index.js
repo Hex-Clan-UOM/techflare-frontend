@@ -1,4 +1,4 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Spinner from "../../../Components/Spinner/Spinner";
 import Searchbar from "../Searchbar/Searchbar";
@@ -7,9 +7,21 @@ import TopicCard from "./TopicCard/TopicCard";
 import { useDispatch, useSelector } from "react-redux";
 import { listPosts } from "../../../Services/fetchPosts";
 
+import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@mui/material/Pagination";
 
+const useStyles = makeStyles(() => ({
+  pagination: {
+    margin: "auto",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    marginBottom: 20,
+  },
+}));
+
 function TopicCards() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const postLists = useSelector((state) => state.fetchPost);
   const { loading, error, posts } = postLists;
@@ -20,10 +32,9 @@ function TopicCards() {
   }, [dispatch, skip]);
 
   const handlePageChange = (event, value) => {
-    console.log(value);
     setSkip((value - 1) * 10);
-    console.log(skip);
   };
+  let count = 502;
 
   return (
     <div>
@@ -46,17 +57,16 @@ function TopicCards() {
             ))}
           </div>
         )}
-        <div>
-          <Pagination
-            count={10}
-            onChange={handlePageChange}
-            siblingCount={1}
-            boundaryCount={1}
-            variant="outlined"
-            shape="rounded"
-            className="my-3"
-          />
-        </div>
+
+        <Pagination
+          count={parseInt(count / 10)}
+          onChange={handlePageChange}
+          siblingCount={4}
+          boundaryCount={3}
+          variant="outlined"
+          shape="rounded"
+          className={classes.pagination}
+        />
       </Container>
     </div>
   );

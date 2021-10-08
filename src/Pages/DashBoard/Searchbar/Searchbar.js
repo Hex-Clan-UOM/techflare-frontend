@@ -7,10 +7,10 @@ function Searchbar() {
   const classes = useStyles();
   return (
     <SearchBar
-    // value={word}
-    // //   onChange={(newValue) => this.setState({ value: newValue })}
-    // onRequestSearch={() => console.log(word)}
-    // className={classes.root}
+      // value={word}
+      // //   onChange={(newValue) => this.setState({ value: newValue })}
+      // onRequestSearch={() => console.log(word)}
+      className={classes.root}
     />
   );
 }
