@@ -1,16 +1,16 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
-  rootes: {
-    margin: "5px 0",
-    color: "#000",
-    background: "#EDF6F9",
-    borderRadius: "8px",
-    marginLeft: 20,
+  search: {
+    marginBottom: 25,
+    marginTop: 10,
   },
   txt: {
-    padding: 10,
+    color: "#fff",
+  },
+  pagination: {
+    margin: "auto",
+    marginTop: 20,
   },
 }));
-
 export default useStyles;
