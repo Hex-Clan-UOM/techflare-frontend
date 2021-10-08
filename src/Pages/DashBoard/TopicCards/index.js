@@ -64,7 +64,7 @@ function TopicCards(props) {
                       author={item.author.firstName}
                       title={item.title}
                       description={item.body}
-                      date={item.createdAt}
+                      date={item.createdAt.slice(0, 10)}
                     />
                   </div>
                 ))}
