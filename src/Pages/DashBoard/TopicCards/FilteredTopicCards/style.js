@@ -1,9 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    marginBottom: 25,
-  },
-}));
+const useStyles = makeStyles({
+  txt: {},
+});
 
 export default useStyles;

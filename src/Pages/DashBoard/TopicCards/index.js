@@ -1,52 +1,58 @@
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Spinner from "../../../Components/Spinner/Spinner";
-import Searchbar from "../Searchbar/Searchbar";
-
 import TopicCard from "./TopicCard/TopicCard";
 import { useDispatch, useSelector } from "react-redux";
+import SearchBar from "material-ui-search-bar";
 import { listFilteredPosts, listPosts } from "../../../Services/fetchPosts";
-
-import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@mui/material/Pagination";
 import FilteredTopicCards from "./FilteredTopicCards/FilteredTopicCards";
+import useStyles from "./style";
 
-const useStyles = makeStyles({});
 function TopicCards(props) {
   const classes = useStyles();
-
   const dispatch = useDispatch();
   const postLists = useSelector((state) => state.fetchPost);
   const { loading, error, posts, number } = postLists;
   const filteredPostLists = useSelector((state) => state.fetchFilteredPosts);
   const { filteredPosts } = filteredPostLists;
 
-  // console.log(number);
   const [skip, setSkip] = useState(0);
-
-  // useEffect(() => {
-  //   dispatch(listFilteredPosts(props.value, skip, 10));
-  // }, [dispatch, skip]);
+  const [search, setsearch] = useState(false);
+  const [value, setValue] = useState();
+  const handlePageChange = (event, value) => {
+    setSkip((value - 1) * 10);
+  };
 
   useEffect(() => {
     dispatch(listPosts(skip, 10));
   }, [dispatch, skip]);
 
-  const handlePageChange = (event, value) => {
-    setSkip((value - 1) * 10);
-  };
-
   return (
     <div>
       <Container sx={{ mt: 2 }}>
-        <Searchbar />
+        {/* Search Bar */}
+        <SearchBar
+          value={value}
+          onChange={(newValue) => setValue(newValue)}
+          onRequestSearch={() => {
+            dispatch(listFilteredPosts(value, 0, 10));
+            setsearch(true);
+          }}
+          className={classes.search}
+        />
+
+        {/* Topic Lists Normal/Filtered */}
 
         {loading ? (
           <Spinner loading={loading} size={300} />
         ) : (
           <div>
-            {typeof filteredPosts === "undefined" ? (
-              <FilteredTopicCards filteredPosts={filteredPosts} />
+            {search ? (
+              <div>
+                <FilteredTopicCards filteredPosts={filteredPosts} />
+                {console.log(filteredPosts.length)}
+              </div>
             ) : (
               <div>
                 {posts.map((item) => (
@@ -62,6 +68,8 @@ function TopicCards(props) {
                 ))}
               </div>
             )}
+
+            {/* Pagination */}
             <Pagination
               count={parseInt(number / 10) || 0}
               onChange={handlePageChange}
@@ -69,6 +77,7 @@ function TopicCards(props) {
               boundaryCount={3}
               variant="outlined"
               shape="rounded"
+              className={classes.pagination}
             />
           </div>
         )}

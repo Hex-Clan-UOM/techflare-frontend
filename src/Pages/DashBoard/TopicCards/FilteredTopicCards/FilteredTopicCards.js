@@ -1,15 +1,17 @@
 import { Typography } from "@mui/material";
 import React from "react";
+import useStyles from "./style";
 import TopicCard from "../TopicCard/TopicCard";
 
 function FilteredTopicCards({ filteredPosts }) {
+  const classes = useStyles();
   return (
     <div>
-      {filteredPosts.success ? (
+      {filteredPosts.length > 0 ? (
         <div>
           {/* {console.log(list.filteredPosts)} */}
-
-          {filteredPosts.data.map((item) => (
+          <Typography sx={{ mb: 2 }}>Results :</Typography>
+          {filteredPosts.map((item) => (
             <div key={item._id}>
               <TopicCard
                 avatar={item.author.avatar}
@@ -23,7 +25,9 @@ function FilteredTopicCards({ filteredPosts }) {
         </div>
       ) : (
         <div>
-          <Typography>{filteredPosts.message}</Typography>
+          <Typography className={classes.txt} variant="h4" align="center">
+            There were no such topics...
+          </Typography>
         </div>
       )}
     </div>
