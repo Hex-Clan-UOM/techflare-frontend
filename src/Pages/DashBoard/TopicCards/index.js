@@ -18,10 +18,12 @@ function TopicCards(props) {
   const { filteredPosts } = filteredPostLists;
 
   const [skip, setSkip] = useState(0);
+  const [page, setpage] = useState(1);
   const [search, setsearch] = useState(false);
   const [value, setValue] = useState();
   const handlePageChange = (event, value) => {
     setSkip((value - 1) * 10);
+    setpage(value);
   };
 
   useEffect(() => {
@@ -62,7 +64,7 @@ function TopicCards(props) {
                       author={item.author.firstName}
                       title={item.title}
                       description={item.body}
-                      date={item.createdAt}
+                      date={item.createdAt.slice(0, 10)}
                     />
                   </div>
                 ))}
@@ -74,6 +76,7 @@ function TopicCards(props) {
               count={parseInt(number / 10) || 0}
               onChange={handlePageChange}
               siblingCount={4}
+              page={page}
               boundaryCount={3}
               variant="outlined"
               shape="rounded"
