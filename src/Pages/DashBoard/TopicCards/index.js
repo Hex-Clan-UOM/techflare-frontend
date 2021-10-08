@@ -9,6 +9,7 @@ import { listFilteredPosts, listPosts } from "../../../Services/fetchPosts";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@mui/material/Pagination";
+import FilteredTopicCards from "./FilteredTopicCards/FilteredTopicCards";
 
 const useStyles = makeStyles({});
 function TopicCards(props) {
@@ -19,15 +20,13 @@ function TopicCards(props) {
   const { loading, error, posts, number } = postLists;
   const filteredPostLists = useSelector((state) => state.fetchFilteredPosts);
   const { filteredPosts } = filteredPostLists;
-  let list = [];
-  list = filteredPostLists;
 
   // console.log(number);
   const [skip, setSkip] = useState(0);
 
-  useEffect(() => {
-    dispatch(listFilteredPosts(props.value, skip, 10));
-  }, [dispatch, skip]);
+  // useEffect(() => {
+  //   dispatch(listFilteredPosts(props.value, skip, 10));
+  // }, [dispatch, skip]);
 
   useEffect(() => {
     dispatch(listPosts(skip, 10));
@@ -46,22 +45,8 @@ function TopicCards(props) {
           <Spinner loading={loading} size={300} />
         ) : (
           <div>
-            {console.log(list.filteredPosts)}
-
-            {list.error !== "search result not found" ? (
-              <div>
-                {list.filteredPosts.map((item) => (
-                  <div key={item._id}>
-                    <TopicCard
-                      avatar={item.author.avatar}
-                      author={item.author.firstName}
-                      title={item.title}
-                      description={item.body}
-                      date={item.createdAt}
-                    />
-                  </div>
-                ))}
-              </div>
+            {typeof filteredPosts === "undefined" ? (
+              <FilteredTopicCards filteredPosts={filteredPosts} />
             ) : (
               <div>
                 {posts.map((item) => (

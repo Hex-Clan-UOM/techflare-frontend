@@ -26,7 +26,7 @@ const Index = () => {
 
           <RoundedBorderBtn
             btnText="Create Topics"
-            onClick={console.log("clicked")}
+            onClick={console.log("Create topics clicked")}
           />
           <LogoutBtn />
         </Toolbar>
