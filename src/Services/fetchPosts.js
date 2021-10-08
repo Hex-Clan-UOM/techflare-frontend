@@ -48,9 +48,10 @@ export const listFilteredPosts = (value, skip, limit) => async (dispatch) => {
 
       config
     );
-
-    dispatch(listFilteredPostSuccess(data));
+    console.log(data);
+    dispatch(listFilteredPostSuccess(data.posts));
   } catch (error) {
+    console.log(error);
     dispatch(listFilteredPostFail(error));
   }
 };
