@@ -27,7 +27,9 @@ function TopicCards(props) {
   };
 
   useEffect(() => {
-    dispatch(listPosts(skip, 10));
+    setTimeout(() => {
+      dispatch(listPosts(skip, 10));
+    }, 3000);
   }, [dispatch, skip]);
 
   return (
@@ -53,7 +55,6 @@ function TopicCards(props) {
             {search ? (
               <div>
                 <FilteredTopicCards filteredPosts={filteredPosts} />
-                {console.log(filteredPosts.length)}
               </div>
             ) : (
               <div>
