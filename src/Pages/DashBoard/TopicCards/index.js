@@ -29,7 +29,9 @@ function TopicCards(props) {
   };
 
   useEffect(() => {
-    dispatch(listPosts(skip, 10));
+    setTimeout(() => {
+      dispatch(listPosts(skip, 10));
+    }, 3000);
   }, [dispatch, skip]);
 
   return (
