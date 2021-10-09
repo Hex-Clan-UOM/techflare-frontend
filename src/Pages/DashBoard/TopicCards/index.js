@@ -15,12 +15,14 @@ function TopicCards(props) {
   const postLists = useSelector((state) => state.fetchPost);
   const { loading, error, posts, number } = postLists;
   const filteredPostLists = useSelector((state) => state.fetchFilteredPosts);
+
   const { filteredPosts } = filteredPostLists;
 
   const [skip, setSkip] = useState(0);
   const [page, setpage] = useState(1);
   const [search, setsearch] = useState(false);
   const [value, setValue] = useState();
+  const [filterLoading, setfilterLoading] = useState(true);
   const handlePageChange = (event, value) => {
     setSkip((value - 1) * 10);
     setpage(value);
@@ -34,6 +36,7 @@ function TopicCards(props) {
     <div>
       <Container sx={{ mt: 2 }}>
         {/* Search Bar */}
+
         <SearchBar
           value={value}
           onChange={(newValue) => setValue(newValue)}
@@ -52,8 +55,10 @@ function TopicCards(props) {
           <div>
             {search ? (
               <div>
-                <FilteredTopicCards filteredPosts={filteredPosts} />
-                {console.log(filteredPosts.length)}
+                <FilteredTopicCards
+                  filteredPosts={filteredPosts}
+                  filterLoading={filteredPostLists.loading}
+                />
               </div>
             ) : (
               <div>
