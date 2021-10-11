@@ -11,6 +11,7 @@ const useStyles = makeStyles(() => ({
   pagination: {
     margin: "auto",
     marginTop: 20,
+    marginBottom: 15,
   },
 }));
 export default useStyles;

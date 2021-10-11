@@ -5,7 +5,7 @@ import useStyles from "./style";
 function RoundedBorderBtn({ btnText, onClick }) {
   const classes = useStyles();
   return (
-    <Button onClick={onClick} variant="contained" className={classes.rootes}>
+    <Button onClick={onClick} variant="contained" className={classes.root}>
       <Typography className={classes.txt}>{btnText}</Typography>
     </Button>
   );

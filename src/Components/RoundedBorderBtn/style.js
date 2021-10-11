@@ -1,12 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
-  rootes: {
-    margin: "5px 0",
-    color: "#000",
-    background: "#EDF6F9",
-    borderRadius: "8px",
-    marginLeft: 20,
+  root: {
+    color: "#000 !important",
+    background: "#EDF6F9 !important",
+    borderRadius: "8px !important",
+    marginLeft: "20px !important",
+    padding: "4px !important",
   },
   txt: {
     padding: 10,
