@@ -1,10 +1,16 @@
-import { Typography } from "@mui/material";
-import React from "react";
+import { Pagination, Typography } from "@mui/material";
+import React, { useState } from "react";
 import useStyles from "./style";
 import TopicCard from "../TopicCard/TopicCard";
 import Spinner from "../../../../Components/Spinner/Spinner";
 
 function FilteredTopicCards({ filteredPosts, filterLoading }) {
+  const [skip, setSkip] = useState(0);
+  const [page, setpage] = useState(1);
+  const handlePageChange = (event, value) => {
+    setSkip((value - 1) * 10);
+    setpage(value);
+  };
   const classes = useStyles();
   return (
     <div>
@@ -30,6 +36,16 @@ function FilteredTopicCards({ filteredPosts, filterLoading }) {
               />
             </div>
           ))}
+          <Pagination
+            count={parseInt(filteredPosts.length / 10) || 0}
+            onChange={handlePageChange}
+            siblingCount={4}
+            page={page}
+            boundaryCount={3}
+            variant="outlined"
+            shape="rounded"
+            className={classes.pagination}
+          />
         </div>
       ) : (
         <div>

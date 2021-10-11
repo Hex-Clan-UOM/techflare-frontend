@@ -9,10 +9,12 @@ import { Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import RoundedBorderBtn from "../RoundedBorderBtn/RoundedBorderBtn";
 import useStyles from "./style";
+import { useHistory } from "react-router";
 const Index = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const classes = useStyles();
+  let history = useHistory();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" className={classes.root}>
@@ -26,7 +28,9 @@ const Index = () => {
 
           <RoundedBorderBtn
             btnText="Create Topics"
-            onClick={console.log("Create topics clicked")}
+            onClick={() => {
+              history.push("/createtopic");
+            }}
           />
           <LogoutBtn />
         </Toolbar>

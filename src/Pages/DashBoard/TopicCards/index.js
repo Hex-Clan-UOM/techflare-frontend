@@ -75,20 +75,20 @@ function TopicCards(props) {
                     />
                   </div>
                 ))}
+                <Pagination
+                  count={parseInt(number / 10) || 0}
+                  onChange={handlePageChange}
+                  siblingCount={4}
+                  page={page}
+                  boundaryCount={3}
+                  variant="outlined"
+                  shape="rounded"
+                  className={classes.pagination}
+                />
               </div>
             )}
 
             {/* Pagination */}
-            <Pagination
-              count={parseInt(number / 10) || 0}
-              onChange={handlePageChange}
-              siblingCount={4}
-              page={page}
-              boundaryCount={3}
-              variant="outlined"
-              shape="rounded"
-              className={classes.pagination}
-            />
           </div>
         )}
       </Container>
