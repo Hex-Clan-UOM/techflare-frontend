@@ -5,6 +5,9 @@ import {
   FILTERED_POST_LIST_FAIL,
   FILTERED_POST_LIST_REQUEST,
   FILTERED_POST_LIST_SUCCESS,
+  POST_REQUEST,
+  POST_SUCCESS,
+  POST_FAIL,
 } from "./Types/fetchPost";
 
 export const listPostRequest = () => {
@@ -40,6 +43,25 @@ export const listFilteredPostSuccess = (data) => {
 export const listFilteredPostFail = (error) => {
   return {
     type: FILTERED_POST_LIST_FAIL,
+    payload:
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+  };
+};
+export const postRequest = () => {
+  return { type: POST_REQUEST };
+};
+export const postSuccess = (data) => {
+  return {
+    type: POST_SUCCESS,
+    payload: data,
+  };
+};
+
+export const postFail = (error) => {
+  return {
+    type: POST_FAIL,
     payload:
       error.response && error.response.data.message
         ? error.response.data.message
