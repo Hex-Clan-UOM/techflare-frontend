@@ -10,7 +10,7 @@ import React from "react";
 import { useHistory } from "react-router";
 import useStyles from "./style";
 
-function TopicCard({ title, author, avatar, description, date }) {
+function TopicCard({ title, author, avatar, description, date, id }) {
   const classes = useStyles();
   let history = useHistory();
   return (
@@ -18,7 +18,7 @@ function TopicCard({ title, author, avatar, description, date }) {
       sx={{ mb: 2 }}
       className={classes.root}
       onClick={() => {
-        history.push("/detailed");
+        history.push(`/detailed/${id}`);
       }}
     >
       <CardHeader
