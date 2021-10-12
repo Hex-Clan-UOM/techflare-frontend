@@ -13,7 +13,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={LoginPage} />
         <ProtectedRoute path="/home" component={DashBoard} />
-        <ProtectedRoute path="/detailed" component={DetailedScreen} />
+        <ProtectedRoute path="/detailed/:id" component={DetailedScreen} />
         <ProtectedRoute path="/createtopic" component={CreateTopic} />
       </Switch>
     </>

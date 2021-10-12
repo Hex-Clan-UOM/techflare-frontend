@@ -3,6 +3,7 @@ import {
   FILTERED_POST_LIST_REQUEST,
   FILTERED_POST_LIST_SUCCESS,
 } from "../Actions/Types/fetchPost";
+import { USER_LOGOUT } from "../Actions/Types/login";
 
 export const FilteredPostListReducer = (
   state = { filteredPosts: [] },
@@ -18,6 +19,8 @@ export const FilteredPostListReducer = (
       };
     case FILTERED_POST_LIST_FAIL:
       return { loading: false, error: action.payload };
+    case USER_LOGOUT:
+      return { filteredPosts: [] };
     default:
       return state;
   }

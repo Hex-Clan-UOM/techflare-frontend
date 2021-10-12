@@ -29,6 +29,6 @@ export const login = (IDToken) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  localStorage.removeItem("userInfo");
+  localStorage.clear();
   dispatch(logoutRequest());
 };
