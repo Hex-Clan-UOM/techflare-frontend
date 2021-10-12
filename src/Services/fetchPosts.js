@@ -76,10 +76,8 @@ export const postDetails = (id) => async (dispatch) => {
 
       config
     );
-
-    dispatch(postSuccess(data));
-
     localStorage.setItem("post", JSON.stringify(data));
+    dispatch(postSuccess(data));
   } catch (error) {
     console.log(error);
     dispatch(postFail(error));

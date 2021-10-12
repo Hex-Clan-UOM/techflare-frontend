@@ -8,10 +8,9 @@ import { postDetails } from "../../Services/fetchPosts";
 const Index = ({ match }) => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.fetchSpecificPost);
-  const { loading } = posts;
-  const post = localStorage.getItem("post")
-    ? JSON.parse(localStorage.getItem("post"))
-    : null;
+  const { loading, error, post } = posts;
+  // const post = JSON.parse(localStorage.getItem("post"));
+
   /*  const postLists = useSelector((state) => state.fetchPost);
   const { posts } = postLists;
   const post = posts.find((post) => post._id === match.params.id);
@@ -31,7 +30,7 @@ const Index = ({ match }) => {
               <Avatar />
             </Grid>
             <Grid item xs={3}>
-              <Typography>{post.author.firstName}</Typography>
+              <Typography>post.author.firstName</Typography>
             </Grid>
             <Grid item xs={6}>
               <Typography>{post.title}</Typography>
