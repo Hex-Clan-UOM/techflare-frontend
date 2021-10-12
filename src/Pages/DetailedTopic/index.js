@@ -1,8 +1,11 @@
 import { Avatar, Container, Grid, Typography } from "@material-ui/core";
 import React from "react";
+import { useHistory } from "react-router";
 import NavBar from "../../Components/NavBar/index";
+import RoundedBorderBtn from "../../Components/RoundedBorderBtn/RoundedBorderBtn";
 
-function index() {
+function DetailedTopic() {
+  let history = useHistory();
   return (
     <div>
       <NavBar />
@@ -29,8 +32,14 @@ function index() {
           </Grid>
         </Grid>
       </Container>
+      <RoundedBorderBtn
+        btnText="Cancel"
+        onClick={() => {
+          history.push("/home");
+        }}
+      />
     </div>
   );
 }
 
-export default index;
+export default DetailedTopic;
