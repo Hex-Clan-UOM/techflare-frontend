@@ -31,6 +31,7 @@ function FilteredTopicCards({ filteredPosts, filterLoading }) {
                     title={item.title}
                     description={item.body}
                     date={item.createdAt.slice(0, 10)}
+                    id={item._id}
                   />
                 </div>
               ))}

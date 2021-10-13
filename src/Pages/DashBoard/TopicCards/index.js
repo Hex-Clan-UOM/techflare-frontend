@@ -32,7 +32,7 @@ function TopicCards(props) {
     setTimeout(() => {
       dispatch(listPosts(skip, 10));
     }, 3000);
-  }, [dispatch, skip]);
+  }, [dispatch, skip, value]);
 
   return (
     <div>
@@ -77,7 +77,7 @@ function TopicCards(props) {
                   </div>
                 ))}
                 <Pagination
-                  count={parseInt(number / 10) || 0}
+                  count={Math.ceil(number / 10) || 0}
                   onChange={handlePageChange}
                   siblingCount={4}
                   page={page}
