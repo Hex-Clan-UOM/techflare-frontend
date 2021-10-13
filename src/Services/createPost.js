@@ -17,7 +17,11 @@ export const createPost = (title, body) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post("/post", { title, body }, config);
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_URL}/post`,
+      { title, body },
+      config
+    );
 
     dispatch(createPostSuccess(data));
   } catch (error) {
