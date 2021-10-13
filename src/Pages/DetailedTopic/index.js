@@ -1,11 +1,28 @@
-import { Avatar, Container, Grid, Typography } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import NavBar from "../../Components/NavBar/index";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../Components/Spinner/Spinner";
 import { postDetails } from "../../Services/fetchPosts";
+import TopicComponent from "./TopicComponent/TopicComponent";
+import RoundedBorderBtn from "../../Components/RoundedBorderBtn/RoundedBorderBtn";
+import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles(() => ({
+  root: {
+    margin: "auto !important",
+  },
+  btn: {
+    marginTop: "10px !important",
+    marginBottom: "20px",
+  },
+  post: {
+    margin: "auto",
+  },
+}));
 const Index = ({ match }) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.fetchSpecificPost);
   const { loading, error, post } = posts;
@@ -18,29 +35,23 @@ const Index = ({ match }) => {
   useEffect(() => {
     dispatch(postDetails(match.params.id));
   }, [dispatch, match]);
+
+  let history = useHistory();
   return (
     <div>
       <NavBar />
       {loading ? (
         <Spinner loading={loading} size={300} />
       ) : (
-        <Container sx={{ mt: 3, mb: 3 }}>
-          <Grid container>
-            <Grid item xs={1}>
-              <Avatar />
-            </Grid>
-            <Grid item xs={3}>
-              <Typography>post.author.firstName</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography>{post.title}</Typography>
-            </Grid>
-          </Grid>
-          <Grid container>
-            <Grid item>
-              <Typography>{post.body}</Typography>
-            </Grid>
-          </Grid>
+        <Container className={classes.root}>
+          <RoundedBorderBtn
+            btnText="Go Back"
+            onClick={() => {
+              history.goBack();
+            }}
+            className={classes.btn}
+          />
+          <TopicComponent post={post} className={classes.post} />
         </Container>
       )}
     </div>
