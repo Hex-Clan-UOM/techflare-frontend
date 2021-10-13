@@ -14,8 +14,8 @@ const useStyles = makeStyles(() => ({
     margin: "auto !important",
   },
   btn: {
-    marginTop: "10px !important",
-    marginBottom: "20px",
+    marginTop: "10px",
+    marginBottom: "2px",
   },
   post: {
     margin: "auto",
@@ -39,14 +39,16 @@ const Index = ({ match }) => {
       {loading ? (
         <Spinner loading={loading} size={300} />
       ) : (
-        <Container className={classes.root}>
-          <RoundedBorderBtn
-            btnText="Go Back"
-            onClick={() => {
-              history.goBack();
-            }}
-            className={classes.btn}
-          />
+        <Container margin="auto 0">
+          <div className={classes.btn}>
+            <RoundedBorderBtn
+              btnText="Go Back"
+              onClick={() => {
+                history.goBack();
+              }}
+            />
+          </div>
+          <br />
           <TopicComponent
             post={post}
             author={author}
