@@ -10,7 +10,7 @@ export const createPostReducer = (state = {}, action) => {
     case CREATE_POST_REQUEST:
       return { loading: true };
     case CREATE_POST_SUCCESS:
-      return { loading: false, userInfo: action.payload };
+      return { loading: false, message: action.payload };
     case CREATE_POST_FAIL:
       return { loading: false, error: action.payload };
     case USER_LOGOUT:
