@@ -22,12 +22,17 @@ function TopicCards(props) {
   const [page, setpage] = useState(1);
   const [search, setsearch] = useState(false);
   const [value, setValue] = useState();
-  const [filterLoading, setfilterLoading] = useState(true);
+  const [pageLoading, setpageLoading] = useState(false);
   const handlePageChange = (event, value) => {
+    setpageLoading(true);
     setSkip((value - 1) * 10);
     setpage(value);
+    setpageLoading(false);
   };
-
+  const sortedPosts = posts.slice().sort((a, b) => b.createdAt - a.createdAt);
+  const sortedFilteredPosts = filteredPosts
+    .slice()
+    .sort((a, b) => b.createdAt - a.createdAt);
   useEffect(() => {
     setTimeout(() => {
       dispatch(listPosts(skip, 10));
@@ -36,9 +41,9 @@ function TopicCards(props) {
 
   return (
     <div>
-      <Container sx={{ mt: 2 }}>
+      <Container sx={{ mt: 2, mb: 2 }} className={classes.root}>
         {/* Search Bar */}
-
+        {pageLoading ?? <Spinner loading={loading} size={300} />}
         <SearchBar
           value={value}
           onChange={(newValue) => setValue(newValue)}
@@ -58,13 +63,13 @@ function TopicCards(props) {
             {search ? (
               <div>
                 <FilteredTopicCards
-                  filteredPosts={filteredPosts}
-                  filterLoading={filteredPostLists.loading}
+                  filteredPosts={sortedFilteredPosts}
+                  filterLoading={sortedFilteredPosts.loading}
                 />
               </div>
             ) : (
               <div>
-                {posts.map((item) => (
+                {sortedPosts.map((item) => (
                   <div key={item._id}>
                     <TopicCard
                       avatar={item.author.avatar}
@@ -76,6 +81,7 @@ function TopicCards(props) {
                     />
                   </div>
                 ))}
+
                 <Pagination
                   count={Math.ceil(number / 10) || 0}
                   onChange={handlePageChange}

@@ -17,6 +17,7 @@ import {
   CardActions,
   CardMedia,
 } from "@material-ui/core";
+import { TextField } from "@mui/material";
 function TopicComponent({ post, author }) {
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -24,7 +25,7 @@ function TopicComponent({ post, author }) {
   };
   return (
     <div>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card>
         <CardHeader
           avatar={<Avatar src={author.avatar} />}
           action={
@@ -33,7 +34,7 @@ function TopicComponent({ post, author }) {
             </IconButton>
           }
           title={author.firstName}
-          subheader={post.createdAt}
+          subheader={" post.createdAt.slice(0, 10)"}
         />
 
         <CardContent>
@@ -53,9 +54,10 @@ function TopicComponent({ post, author }) {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
-          <IconButton aria-label="share">
+          {/* <IconButton aria-label="share">
             <ShareIcon />
-          </IconButton>
+          </IconButton> */}
+          <Typography>Comments</Typography>
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
@@ -67,35 +69,24 @@ function TopicComponent({ post, author }) {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography paragraph>Method:</Typography>
-            <Typography paragraph>
-              Heat 1/2 cup of the broth in a pot until simmering, add saffron
-              and set aside for 10 minutes.
-            </Typography>
-            <Typography paragraph>
-              Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-              over medium-high heat. Add chicken, shrimp and chorizo, and cook,
-              stirring occasionally until lightly browned, 6 to 8 minutes.
-              Transfer shrimp to a large plate and set aside, leaving chicken
-              and chorizo in the pan. Add pimentón, bay leaves, garlic,
-              tomatoes, onion, salt and pepper, and cook, stirring often until
-              thickened and fragrant, about 10 minutes. Add saffron broth and
-              remaining 4 1/2 cups chicken broth; bring to a boil.
-            </Typography>
-            <Typography paragraph>
-              Add rice and stir very gently to distribute. Top with artichokes
-              and peppers, and cook without stirring, until most of the liquid
-              is absorbed, 15 to 18 minutes. Reduce heat to medium-low, add
-              reserved shrimp and mussels, tucking them down into the rice, and
-              cook again without stirring, until mussels have opened and rice is
-              just tender, 5 to 7 minutes more. (Discard any mussels that don’t
-              open.)
-            </Typography>
-            <Typography>
-              Set aside off of the heat to let rest for 10 minutes, and then
-              serve.
-            </Typography>
+            <Typography paragraph>Comment Section</Typography>
+            <TextField fullWidth placeholder="Comment Here" />
           </CardContent>
+          <Card>
+            <CardHeader
+              avatar={<Avatar src={author.avatar} />}
+              action={
+                <IconButton aria-label="settings">
+                  <MoreVertIcon />
+                </IconButton>
+              }
+              title=" jhon"
+              subheader="10/02/2090"
+            />
+            <CardContent>
+              <Typography paragraph>Nice Post!</Typography>
+            </CardContent>
+          </Card>
         </Collapse>
       </Card>
     </div>
