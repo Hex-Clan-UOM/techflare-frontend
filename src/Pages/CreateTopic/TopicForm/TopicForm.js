@@ -3,8 +3,11 @@ import { Grid, TextField, Typography } from "@mui/material";
 import RoundedBorderBtn from "../../../Components/RoundedBorderBtn/RoundedBorderBtn";
 import useStyles from "./style";
 import { useHistory } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost } from "../../../Services/createPost";
 
 function TopicForm() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   let history = useHistory();
   const [topic, settopic] = useState("");
@@ -19,8 +22,7 @@ function TopicForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(`Topic is ${topic}`);
-    console.log(`Text is ${text}`);
+    dispatch(createPost(topic, text));
     history.push("/home");
   };
   return (

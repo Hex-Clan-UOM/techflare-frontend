@@ -5,7 +5,10 @@ import {
 } from "../Actions/Types/fetchPost";
 import { USER_LOGOUT } from "../Actions/Types/login";
 
-export const postDetailsReducer = (state = { post: {} }, action) => {
+export const postDetailsReducer = (
+  state = { post: {}, author: {} },
+  action
+) => {
   switch (action.type) {
     case POST_REQUEST:
       return { loading: true };
@@ -13,11 +16,12 @@ export const postDetailsReducer = (state = { post: {} }, action) => {
       return {
         loading: false,
         post: action.payload,
+        author: action.payload1,
       };
     case POST_FAIL:
       return { loading: false, error: action.payload };
     case USER_LOGOUT:
-      return { post: {} };
+      return { post: {}, author: {} };
     default:
       return state;
   }

@@ -17,7 +17,7 @@ import {
   CardActions,
   CardMedia,
 } from "@material-ui/core";
-function TopicComponent({ post }) {
+function TopicComponent({ post, author }) {
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -26,14 +26,14 @@ function TopicComponent({ post }) {
     <div>
       <Card sx={{ maxWidth: 345 }}>
         <CardHeader
-          avatar={<Avatar src={post.author.avatar} />}
+          avatar={<Avatar src={author.avatar} />}
           action={
             <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
           }
-          title={post.author.firstName}
-          subheader={post.createdAt.slice(0, 10)}
+          title={author.firstName}
+          subheader={"post.createdAt.slice(0, 10)"}
         />
 
         <CardContent>

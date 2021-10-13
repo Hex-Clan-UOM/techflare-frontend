@@ -56,6 +56,7 @@ export const postSuccess = (data) => {
   return {
     type: POST_SUCCESS,
     payload: data,
+    payload1: data.author,
   };
 };
 
