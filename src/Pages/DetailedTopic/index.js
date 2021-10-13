@@ -8,7 +8,7 @@ import { postDetails } from "../../Services/fetchPosts";
 const Index = ({ match }) => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.fetchSpecificPost);
-  const { loading, error, post } = posts;
+  const { loading, error, post, author } = posts;
   // const post = JSON.parse(localStorage.getItem("post"));
 
   /*  const postLists = useSelector((state) => state.fetchPost);
@@ -30,7 +30,7 @@ const Index = ({ match }) => {
               <Avatar />
             </Grid>
             <Grid item xs={3}>
-              <Typography>post.author.firstName</Typography>
+              <Typography>{author.firstName}</Typography>
             </Grid>
             <Grid item xs={6}>
               <Typography>{post.title}</Typography>
