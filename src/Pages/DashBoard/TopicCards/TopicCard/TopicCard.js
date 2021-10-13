@@ -33,7 +33,7 @@ function TopicCard({ title, author, avatar, description, date, id }) {
         className={classes.header}
       />
       <CardContent className={classes.content}>
-        <Typography>{description.substring(0, 200)} ... see more</Typography>
+        <Typography>{description.substring(0, 200)} ... </Typography>
       </CardContent>
     </Card>
   );
