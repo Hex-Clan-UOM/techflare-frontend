@@ -26,12 +26,7 @@ const Index = ({ match }) => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.fetchSpecificPost);
   const { loading, error, post } = posts;
-  // const post = JSON.parse(localStorage.getItem("post"));
 
-  /*  const postLists = useSelector((state) => state.fetchPost);
-  const { posts } = postLists;
-  const post = posts.find((post) => post._id === match.params.id);
-  localStorage.setItem("post", JSON.stringify(post));*/
   useEffect(() => {
     dispatch(postDetails(match.params.id));
   }, [dispatch, match]);

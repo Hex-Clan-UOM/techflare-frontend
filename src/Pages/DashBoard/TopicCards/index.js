@@ -22,23 +22,25 @@ function TopicCards(props) {
   const [page, setpage] = useState(1);
   const [search, setsearch] = useState(false);
   const [value, setValue] = useState();
-  const [filterLoading, setfilterLoading] = useState(true);
+  const [pageLoading, setpageLoading] = useState(false);
   const handlePageChange = (event, value) => {
+    setpageLoading(true);
     setSkip((value - 1) * 10);
     setpage(value);
+    setpageLoading(false);
   };
 
   useEffect(() => {
     setTimeout(() => {
       dispatch(listPosts(skip, 10));
     }, 3000);
-  }, [dispatch, skip, value]);
+  }, [dispatch, skip]);
 
   return (
     <div>
       <Container sx={{ mt: 2 }}>
         {/* Search Bar */}
-
+        {pageLoading ?? <Spinner loading={loading} size={300} />}
         <SearchBar
           value={value}
           onChange={(newValue) => setValue(newValue)}

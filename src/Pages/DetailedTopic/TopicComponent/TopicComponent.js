@@ -26,14 +26,14 @@ function TopicComponent({ post }) {
     <div>
       <Card sx={{ maxWidth: 345 }}>
         <CardHeader
-          avatar={<Avatar src={"post.author.avatar"} />}
+          avatar={<Avatar src={post.author.avatar} />}
           action={
             <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
           }
-          title={"post.author.firstName"}
-          subheader={"post.createdAt.slice(0, 10)"}
+          title={post.author.firstName}
+          subheader={post.createdAt.slice(0, 10)}
         />
 
         <CardContent>
