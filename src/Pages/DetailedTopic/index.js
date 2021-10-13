@@ -51,7 +51,11 @@ const Index = ({ match }) => {
             }}
             className={classes.btn}
           />
-          <TopicComponent post={post} className={classes.post} />
+          <TopicComponent
+            post={post}
+            author={author}
+            className={classes.post}
+          />
         </Container>
       )}
     </div>

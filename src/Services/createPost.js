@@ -5,7 +5,7 @@ import {
   createPostSuccess,
 } from "../Actions/createPostAction";
 
-export const register = (title, body) => async (dispatch) => {
+export const createPost = (title, body) => async (dispatch) => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   try {
     dispatch(createPostRequest());
