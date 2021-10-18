@@ -7,6 +7,7 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
+  USER_LOGOUT,
 } from "../Actions/Types/login";
 
 configure({ adapter: new Adapter() });
@@ -51,4 +52,7 @@ test("handles successful login", () => {
     loading: false,
     userInfo: { id: 17 },
   });
+});
+test("handles user logout", () => {
+  expect(userLoginReducer({}, { type: USER_LOGOUT })).toEqual({});
 });
