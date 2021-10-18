@@ -3,7 +3,11 @@ import { shallow } from "enzyme";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { userLoginReducer } from "../Reducer/loginReducer";
-import * as actions from "../Actions/loginAction";
+import {
+  USER_LOGIN_FAIL,
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+} from "../Actions/Types/login";
 
 configure({ adapter: new Adapter() });
 
@@ -15,29 +19,36 @@ test("have a logo", () => {
   const component = shallow(<LoginPage />);
   expect(component.find("img")).toHaveLength(1);
 });
+test("should return the initial state", () => {
+  expect(userLoginReducer(undefined, {})).toEqual({});
+});
 
-describe("team reducer", () => {
-  it("should return the initial state", () => {
-    expect(userLoginReducer(undefined, {})).toEqual({});
+test("handles login request", () => {
+  expect(userLoginReducer({}, { type: USER_LOGIN_REQUEST })).toEqual({
+    loading: true,
   });
-  it("should handle USER_LOGIN_REQUEST", () => {
-    const startAction = {
-      type: actions.USER_LOGIN_REQUEST,
-    };
-    expect(userLoginReducer({}, startAction)).toEqual({});
+});
+
+test("handles login failure", () => {
+  expect(
+    userLoginReducer({}, { type: USER_LOGIN_FAIL, payload: "unable to login" })
+  ).toEqual({
+    loading: false,
+    error: "unable to login",
   });
-  it("should handle USER_LOGIN_SUCCESS", () => {
-    const successAction = {
-      type: actions.USER_LOGIN_SUCCESS,
-      userInfo: {},
-    };
-    expect(userLoginReducer({}, successAction)).toEqual({});
-  });
-  it("should handle USER_LOGIN_FAIL", () => {
-    const failAction = {
-      type: actions.USER_LOGIN_FAIL,
-      error: {},
-    };
-    expect(userLoginReducer({}, failAction)).toEqual({});
+});
+
+test("handles successful login", () => {
+  expect(
+    userLoginReducer(
+      {},
+      {
+        type: USER_LOGIN_SUCCESS,
+        payload: { id: 17 },
+      }
+    )
+  ).toEqual({
+    loading: false,
+    userInfo: { id: 17 },
   });
 });
