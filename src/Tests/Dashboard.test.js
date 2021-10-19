@@ -9,12 +9,29 @@ import {
 import { USER_LOGOUT } from "../Actions/Types/login";
 import DashBoard from "../Pages/DashBoard";
 import { postListReducer } from "../Reducer/postReducer";
+import React from "react";
+import { Provider } from "react-redux";
+import renderer from "react-test-renderer";
+import configureStore from "redux-mock-store";
+import { userLoginReducer } from "../Reducer/loginReducer";
+import * as postActions from "../Actions/postAction";
 
 configure({ adapter: new Adapter() });
+const mockStore = configureStore({});
+let store;
+let component;
+beforeEach(() => {
+  store = mockStore({
+    userLogin: { userInfo: {} },
+    fetchPost: { loading: true, error: "", posts: [] },
+    fetchFilteredPosts: { filteredPosts: [] },
+  });
 
-test("have 10 posts", () => {
-  const component = shallow(<DashBoard />);
-  expect(component.find("TopicCards")).toHaveLength(10);
+  component = renderer.create(
+    <Provider store={store}>
+      <DashBoard />
+    </Provider>
+  );
 });
 
 test("should return the initial state", () => {
@@ -58,4 +75,43 @@ test("handles user logout", () => {
     posts: [],
     number: 0,
   });
+});
+test("Dispatches the post list request", () => {
+  const expectedActions = [
+    {
+      type: POST_LIST_REQUEST,
+    },
+  ];
+
+  store.dispatch(postActions.listPostRequest());
+  expect(store.getActions()).toEqual(expectedActions);
+});
+test("Dispatches the post list success", () => {
+  const expectedActions = [
+    {
+      payload: [{ id: 10 }, { id: 32 }],
+      payload1: 19,
+      type: POST_LIST_SUCCESS,
+    },
+  ];
+
+  store.dispatch(
+    postActions.listPostSuccess({ posts: [{ id: 10 }, { id: 32 }], number: 19 })
+  );
+  expect(store.getActions()).toEqual(expectedActions);
+});
+test("Dispatches the post list fail", () => {
+  const expectedActions = [
+    {
+      type: POST_LIST_FAIL,
+      payload: "unable to load",
+    },
+  ];
+
+  store.dispatch(
+    postActions.listPostFail({
+      response: { data: { message: "unable to load" } },
+    })
+  );
+  expect(store.getActions()).toEqual(expectedActions);
 });
