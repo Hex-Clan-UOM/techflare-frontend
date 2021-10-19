@@ -25,7 +25,8 @@ const Index = ({ match }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.fetchSpecificPost);
-  const { loading, error, post, author } = posts;
+  const { loading, error, post, comments, author } = posts;
+
   // const post = JSON.parse(localStorage.getItem("post"));
 
   useEffect(() => {
@@ -52,6 +53,7 @@ const Index = ({ match }) => {
           <TopicComponent
             post={post}
             author={author}
+            comments={comments}
             className={classes.post}
           />
         </Container>

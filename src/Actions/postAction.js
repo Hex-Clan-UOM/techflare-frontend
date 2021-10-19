@@ -55,8 +55,9 @@ export const postRequest = () => {
 export const postSuccess = (data) => {
   return {
     type: POST_SUCCESS,
-    payload: data,
-    payload1: data.author,
+    payload: data.post,
+    payload1: data.post.author,
+    payload2: data.comments,
   };
 };
 

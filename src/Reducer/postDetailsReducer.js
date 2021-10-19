@@ -6,7 +6,7 @@ import {
 import { USER_LOGOUT } from "../Actions/Types/login";
 
 export const postDetailsReducer = (
-  state = { post: {}, author: {} },
+  state = { post: {}, author: {}, comments: [] },
   action
 ) => {
   switch (action.type) {
@@ -17,6 +17,7 @@ export const postDetailsReducer = (
         loading: false,
         post: action.payload,
         author: action.payload1,
+        comments: action.payload2,
       };
     case POST_FAIL:
       return { loading: false, error: action.payload };

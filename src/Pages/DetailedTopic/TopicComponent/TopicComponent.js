@@ -18,7 +18,7 @@ import {
   CardMedia,
 } from "@material-ui/core";
 import { TextField } from "@mui/material";
-function TopicComponent({ post, author }) {
+function TopicComponent({ post, author, comments }) {
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -72,21 +72,26 @@ function TopicComponent({ post, author }) {
             <Typography paragraph>Comment Section</Typography>
             <TextField fullWidth placeholder="Comment Here" />
           </CardContent>
-          <Card>
-            <CardHeader
-              avatar={<Avatar src={author.avatar} />}
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
-              }
-              title=" jhon"
-              subheader="10/02/2090"
-            />
-            <CardContent>
-              <Typography paragraph>Nice Post!</Typography>
-            </CardContent>
-          </Card>
+
+          {comments.map((comment) => {
+            return (
+              <Card key={comment._id}>
+                <CardHeader
+                  avatar={<Avatar src={comment.author.avatar} />}
+                  action={
+                    <IconButton aria-label="settings">
+                      <MoreVertIcon />
+                    </IconButton>
+                  }
+                  title={comment.author.firstName}
+                  subheader={comment.createdAt.slice(0, 10)}
+                />
+                <CardContent>
+                  <Typography paragraph>{comment.body}</Typography>
+                </CardContent>
+              </Card>
+            );
+          })}
         </Collapse>
       </Card>
     </div>
