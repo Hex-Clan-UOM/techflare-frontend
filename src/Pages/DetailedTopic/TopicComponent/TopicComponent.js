@@ -4,7 +4,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { ExpandMore } from "@material-ui/icons";
+import { CommentRounded, ExpandMore } from "@material-ui/icons";
+import Comment from "./Comment";
 import {
   Avatar,
   Container,
@@ -20,9 +21,11 @@ import {
 import { TextField } from "@mui/material";
 function TopicComponent({ post, author, comments }) {
   const [expanded, setExpanded] = React.useState(false);
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
   return (
     <div>
       <Card>
@@ -74,23 +77,7 @@ function TopicComponent({ post, author, comments }) {
           </CardContent>
 
           {comments.map((comment) => {
-            return (
-              <Card key={comment._id}>
-                <CardHeader
-                  avatar={<Avatar src={comment.author.avatar} />}
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                  title={comment.author.firstName}
-                  subheader={comment.createdAt.slice(0, 10)}
-                />
-                <CardContent>
-                  <Typography paragraph>{comment.body}</Typography>
-                </CardContent>
-              </Card>
-            );
+            return <Comment comment={comment} key={comment._id} />;
           })}
         </Collapse>
       </Card>

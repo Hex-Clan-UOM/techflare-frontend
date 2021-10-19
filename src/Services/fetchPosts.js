@@ -76,7 +76,6 @@ export const postDetails = (id) => async (dispatch) => {
 
       config
     );
-    console.log(data);
     dispatch(postSuccess(data));
   } catch (error) {
     console.log(error);
