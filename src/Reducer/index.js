@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { createPostReducer } from "./createPostReducer";
+import { createCommentReducer } from "./createCommentReducer";
 import { FilteredPostListReducer } from "./filteredPostReducer";
 import { userLoginReducer } from "./loginReducer";
 import { postDetailsReducer } from "./postDetailsReducer";
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   fetchFilteredPosts: FilteredPostListReducer,
   fetchSpecificPost: postDetailsReducer,
   createPost: createPostReducer,
+  createComment: createCommentReducer,
 });
 
 export default rootReducer;
