@@ -6,6 +6,8 @@ import MenuItem from "@mui/material/MenuItem";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ReportIcon from "@mui/icons-material/Report";
+import { useSelector } from "react-redux";
+
 import {
   Avatar,
   Typography,
@@ -13,9 +15,10 @@ import {
   Card,
   CardHeader,
 } from "@material-ui/core";
-function Comment({ comment }) {
+function Comment({ comment, userInfo }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -75,14 +78,18 @@ function Comment({ comment }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
-          <EditIcon fontSize="small" />
-          Edit
-        </MenuItem>
-        <MenuItem>
-          <DeleteIcon fontSize="small" />
-          Delete
-        </MenuItem>
+        {userInfo._id === comment.author._id && (
+          <>
+            <MenuItem>
+              <EditIcon fontSize="small" />
+              Edit
+            </MenuItem>
+            <MenuItem>
+              <DeleteIcon fontSize="small" />
+              Delete
+            </MenuItem>
+          </>
+        )}
         <MenuItem>
           <ReportIcon fontSize="small" />
           Report

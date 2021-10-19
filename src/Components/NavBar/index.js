@@ -19,6 +19,12 @@ const Index = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" className={classes.root}>
         <Toolbar>
+          <RoundedBorderBtn
+            btnText="Home"
+            onClick={() => {
+              history.push("/home");
+            }}
+          />
           {userInfo && <Avatar src={userInfo.avatar} sx={{ mr: 2 }} />}
           {userInfo && (
             <Typography sx={{ flexGrow: 1 }} className={classes.txt}>

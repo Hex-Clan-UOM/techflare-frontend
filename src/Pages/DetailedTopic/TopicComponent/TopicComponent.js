@@ -2,7 +2,9 @@ import React from "react";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ReportIcon from "@mui/icons-material/Report";
 import {
   Avatar,
   Typography,
@@ -11,16 +13,31 @@ import {
   CardHeader,
   CardActions,
 } from "@material-ui/core";
-function TopicComponent({ post, author, comments }) {
+function TopicComponent({ post, author, comments, userInfo }) {
   return (
     <div>
       <Card>
         <CardHeader
           avatar={<Avatar src={author.avatar} />}
           action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
+            <>
+              {userInfo._id === author._id && (
+                <>
+                  <EditIcon
+                    onClick={() => console.log("edit")}
+                    cursor="pointer"
+                  />
+                  <DeleteIcon
+                    onClick={() => console.log("delete")}
+                    cursor="pointer"
+                  />
+                </>
+              )}
+              <ReportIcon
+                onClick={() => console.log("report")}
+                cursor="pointer"
+              />
+            </>
           }
           title={author.firstName}
           subheader={post.createdAt}

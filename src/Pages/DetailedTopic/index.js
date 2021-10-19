@@ -32,6 +32,9 @@ const Index = ({ match }) => {
   const { loading, error, post, comments, author } = posts;
   const [newcomment, setNewcomment] = React.useState("");
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   // const post = JSON.parse(localStorage.getItem("post"));
 
   /*  const postLists = useSelector((state) => state.fetchPost);
@@ -69,6 +72,7 @@ const Index = ({ match }) => {
             author={author}
             comments={comments}
             className={classes.post}
+            userInfo={userInfo}
           />
           <AddComment
             handleSubmitComment={handleSubmitComment}
@@ -76,7 +80,13 @@ const Index = ({ match }) => {
             setNewcomment={setNewcomment}
           />
           {comments.map((comment) => {
-            return <Comment comment={comment} key={comment._id} />;
+            return (
+              <Comment
+                comment={comment}
+                key={comment._id}
+                userInfo={userInfo}
+              />
+            );
           })}
         </Container>
       )}
