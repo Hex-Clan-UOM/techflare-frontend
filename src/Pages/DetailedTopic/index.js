@@ -18,8 +18,8 @@ const useStyles = makeStyles(() => ({
     margin: "auto !important",
   },
   btn: {
-    marginTop: "10px",
-    marginBottom: "2px",
+    marginTop: "10px !important",
+    marginBottom: "20px",
   },
   post: {
     margin: "auto",
@@ -34,6 +34,10 @@ const Index = ({ match }) => {
 
   // const post = JSON.parse(localStorage.getItem("post"));
 
+  /*  const postLists = useSelector((state) => state.fetchPost);
+  const { posts } = postLists;
+  const post = posts.find((post) => post._id === match.params.id);
+  localStorage.setItem("post", JSON.stringify(post));*/
   useEffect(() => {
     dispatch(postDetails(match.params.id));
   }, [dispatch, match]);
@@ -52,16 +56,14 @@ const Index = ({ match }) => {
       {loading ? (
         <Spinner loading={loading} size={300} />
       ) : (
-        <Container margin="auto 0">
-          <div className={classes.btn}>
-            <RoundedBorderBtn
-              btnText="Go Back"
-              onClick={() => {
-                history.goBack();
-              }}
-            />
-          </div>
-          <br />
+        <Container className={classes.root}>
+          <RoundedBorderBtn
+            btnText="Go Back"
+            onClick={() => {
+              history.goBack();
+            }}
+            className={classes.btn}
+          />
           <TopicComponent
             post={post}
             author={author}

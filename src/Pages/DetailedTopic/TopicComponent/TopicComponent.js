@@ -23,7 +23,7 @@ function TopicComponent({ post, author, comments }) {
             </IconButton>
           }
           title={author.firstName}
-          subheader={" post.createdAt.slice(0, 10)"}
+          subheader={post.createdAt}
         />
         <CardContent>
           <Typography
