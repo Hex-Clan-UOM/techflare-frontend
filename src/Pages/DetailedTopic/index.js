@@ -8,6 +8,10 @@ import TopicComponent from "./TopicComponent/TopicComponent";
 import RoundedBorderBtn from "../../Components/RoundedBorderBtn/RoundedBorderBtn";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import Comment from "./TopicComponent/Comment";
+import { Typography } from "@material-ui/core";
+import AddComment from "./TopicComponent/AddComment";
+import { createComment } from "../../Services/createComment";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -25,7 +29,12 @@ const Index = ({ match }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.fetchSpecificPost);
-  const { loading, error, post, author } = posts;
+  const { loading, error, post, comments, author } = posts;
+  const [newcomment, setNewcomment] = React.useState("");
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   // const post = JSON.parse(localStorage.getItem("post"));
 
   /*  const postLists = useSelector((state) => state.fetchPost);
@@ -35,6 +44,13 @@ const Index = ({ match }) => {
   useEffect(() => {
     dispatch(postDetails(match.params.id));
   }, [dispatch, match]);
+
+  const handleSubmitComment = (e) => {
+    e.preventDefault();
+    dispatch(createComment(post._id, newcomment));
+    dispatch(postDetails(match.params.id));
+    setNewcomment("");
+  };
 
   let history = useHistory();
   return (
@@ -54,8 +70,24 @@ const Index = ({ match }) => {
           <TopicComponent
             post={post}
             author={author}
+            comments={comments}
             className={classes.post}
+            userInfo={userInfo}
           />
+          <AddComment
+            handleSubmitComment={handleSubmitComment}
+            newcomment={newcomment}
+            setNewcomment={setNewcomment}
+          />
+          {comments.map((comment) => {
+            return (
+              <Comment
+                comment={comment}
+                key={comment._id}
+                userInfo={userInfo}
+              />
+            );
+          })}
         </Container>
       )}
     </div>
