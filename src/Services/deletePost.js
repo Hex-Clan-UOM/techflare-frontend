@@ -7,7 +7,7 @@ import {
 
 export const deletePost = (id) => async (dispatch) => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-
+  console.log(id);
   try {
     dispatch(deletePostRequest());
 
@@ -17,7 +17,7 @@ export const deletePost = (id) => async (dispatch) => {
         Authorization: userInfo.accessToken,
       },
     };
-
+    console.log(userInfo.accessToken);
     const { data } = await axios.delete(
       `${process.env.REACT_APP_URL}/post/${id}`,
       config
