@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -13,7 +13,18 @@ import {
   CardHeader,
   CardActions,
 } from "@material-ui/core";
-function TopicComponent({ post, author, comments, userInfo }) {
+function TopicComponent({ post, author, comments, userInfo, likes }) {
+  const [liked, setLiked] = useState("white");
+
+  useEffect(() => {
+    const userliked = likes.filter((like) => like._id === userInfo._id);
+    if (userliked.length !== 0) {
+      setLiked("red");
+    } else {
+      setLiked("gray");
+    }
+  }, []);
+  console.log(liked);
   return (
     <div>
       <Card>
@@ -56,10 +67,14 @@ function TopicComponent({ post, author, comments, userInfo }) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
+          {likes.length}
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+            <FavoriteIcon
+              style={{ color: liked }}
+              onClick={() => setLiked("red")}
+            />
           </IconButton>
-          <Typography>{comments.length} Comments</Typography>
+          <Typography> {comments.length} Comments</Typography>
         </CardActions>
       </Card>
     </div>
