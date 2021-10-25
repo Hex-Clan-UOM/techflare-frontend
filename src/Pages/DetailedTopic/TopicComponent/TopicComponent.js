@@ -18,9 +18,13 @@ import {
 import { deletePost } from "../../../Services/deletePost";
 import { useHistory } from "react-router";
 import DeleteModal from "../../../Components/ConfirmationModa;/DeleteModal";
+import { likePost, unlikePost } from "../../../Services/likePost";
+import { postDetails } from "./../../../Services/fetchPosts";
 
 function TopicComponent({ post, author, comments, userInfo, likes }) {
-  const [liked, setLiked] = useState("white");
+  const [allLikes, setAllLikes] = useState(likes);
+  const [liked, setLiked] = useState(false);
+  const [likeColor, setLikeColor] = useState("white");
   const [open, setOpen] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const dispatch = useDispatch();
@@ -28,11 +32,19 @@ function TopicComponent({ post, author, comments, userInfo, likes }) {
   useEffect(() => {
     const userliked = likes.filter((like) => like._id === userInfo._id);
     if (userliked.length !== 0) {
-      setLiked("red");
+      setLiked(true);
     } else {
-      setLiked("gray");
+      setLiked(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (liked) {
+      setLikeColor("red");
+    } else {
+      setLikeColor("gray");
+    }
+  }, [liked]);
 
   useEffect(() => {
     if (deleteConfirm) {
@@ -41,6 +53,20 @@ function TopicComponent({ post, author, comments, userInfo, likes }) {
       setDeleteConfirm(false);
     }
   }, [deleteConfirm]);
+
+  const handleLikePost = () => {
+    console.log("like cliked");
+    if (!liked) {
+      dispatch(likePost(post._id));
+      setLiked(true);
+      setAllLikes([...allLikes, { _id: userInfo._id }]);
+    } else {
+      dispatch(unlikePost(post._id));
+      const newLikes = allLikes.filter((like) => like._id !== userInfo._id);
+      setAllLikes(newLikes);
+      setLiked(false);
+    }
+  };
   return (
     <div>
       <Card>
@@ -81,11 +107,11 @@ function TopicComponent({ post, author, comments, userInfo, likes }) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          {likes.length}
+          {allLikes.length}
           <IconButton aria-label="add to favorites">
             <FavoriteIcon
-              style={{ color: liked }}
-              onClick={() => setLiked("red")}
+              style={{ color: likeColor }}
+              onClick={handleLikePost}
             />
           </IconButton>
           <Typography> {comments.length} Comments</Typography>
