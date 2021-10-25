@@ -5,7 +5,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ReportIcon from "@mui/icons-material/Report";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import {
   Avatar,
@@ -17,9 +17,12 @@ import {
 } from "@material-ui/core";
 import { deletePost } from "../../../Services/deletePost";
 import { useHistory } from "react-router";
+import DeleteModal from "../../../Components/ConfirmationModa;/DeleteModal";
 
 function TopicComponent({ post, author, comments, userInfo, likes }) {
   const [liked, setLiked] = useState("white");
+  const [open, setOpen] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
   const dispatch = useDispatch();
   let history = useHistory();
   useEffect(() => {
@@ -30,12 +33,14 @@ function TopicComponent({ post, author, comments, userInfo, likes }) {
       setLiked("gray");
     }
   }, []);
-  const deleteHandler = (id) => {
-    console.log(id);
-    dispatch(deletePost(id));
-    history.push("/home");
-  };
-  console.log(liked);
+
+  useEffect(() => {
+    if (deleteConfirm) {
+      dispatch(deletePost(post._id));
+      history.push("/home");
+      setDeleteConfirm(false);
+    }
+  }, [deleteConfirm]);
   return (
     <div>
       <Card>
@@ -50,10 +55,7 @@ function TopicComponent({ post, author, comments, userInfo, likes }) {
                     cursor="pointer"
                   />
 
-                  <DeleteIcon
-                    onClick={() => deleteHandler(post._id)}
-                    cursor="pointer"
-                  />
+                  <DeleteIcon onClick={() => setOpen(true)} cursor="pointer" />
                 </>
               )}
               <ReportIcon
@@ -89,6 +91,12 @@ function TopicComponent({ post, author, comments, userInfo, likes }) {
           <Typography> {comments.length} Comments</Typography>
         </CardActions>
       </Card>
+      <DeleteModal
+        open={open}
+        setOpen={setOpen}
+        setDeleteConfirm={setDeleteConfirm}
+        item="post"
+      />
     </div>
   );
 }
