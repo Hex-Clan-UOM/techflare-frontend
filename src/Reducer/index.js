@@ -6,7 +6,7 @@ import { userLoginReducer } from "./loginReducer";
 import { postDetailsReducer } from "./postDetailsReducer";
 import { postListReducer } from "./postReducer";
 import { postDeleteReducer } from "./deletePostReducer";
-
+import { updatePostReducer } from "./updatePostReducer";
 const rootReducer = combineReducers({
   userLogin: userLoginReducer,
   fetchPost: postListReducer,
@@ -15,6 +15,7 @@ const rootReducer = combineReducers({
   createPost: createPostReducer,
   createComment: createCommentReducer,
   deletePost: postDeleteReducer,
+  updatePost: updatePostReducer,
 });
 
 export default rootReducer;
