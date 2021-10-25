@@ -9,17 +9,26 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
 } from "../Actions/Types/login";
+import React from "react";
+import { Provider } from "react-redux";
+import renderer from "react-test-renderer";
+import configureStore from "redux-mock-store";
+import * as loginActions from "../Actions/loginAction";
 
 configure({ adapter: new Adapter() });
+const mockStore = configureStore([]);
+let store;
+let component;
+beforeEach(() => {
+  store = mockStore({});
+  store.clearActions();
+  component = renderer.create(
+    <Provider store={store}>
+      <LoginPage />
+    </Provider>
+  );
+});
 
-test("have a login button", () => {
-  const component = shallow(<LoginPage />);
-  expect(component.find("LoginBtn")).toHaveLength(1);
-});
-test("have a logo", () => {
-  const component = shallow(<LoginPage />);
-  expect(component.find("img")).toHaveLength(1);
-});
 test("should return the initial state", () => {
   expect(userLoginReducer(undefined, {})).toEqual({});
 });
@@ -55,4 +64,48 @@ test("handles successful login", () => {
 });
 test("handles user logout", () => {
   expect(userLoginReducer({}, { type: USER_LOGOUT })).toEqual({});
+});
+
+test("Dispatches the login request", () => {
+  const expectedActions = [
+    {
+      type: USER_LOGIN_REQUEST,
+    },
+  ];
+
+  store.dispatch(loginActions.loginRequest());
+  expect(store.getActions()).toEqual(expectedActions);
+});
+test("Dispatches the login success", () => {
+  const expectedActions = [
+    { payload: { id: 23, name: "Madhu" }, type: USER_LOGIN_SUCCESS },
+  ];
+
+  store.dispatch(loginActions.loginSuccess({ id: 23, name: "Madhu" }));
+  expect(store.getActions()).toEqual(expectedActions);
+});
+test("Dispatches the login fail", () => {
+  const expectedActions = [
+    {
+      type: USER_LOGIN_FAIL,
+      payload: "unable to login",
+    },
+  ];
+
+  store.dispatch(
+    loginActions.loginFail({
+      response: { data: { message: "unable to login" } },
+    })
+  );
+  expect(store.getActions()).toEqual(expectedActions);
+});
+test("Dispatches the logout request", () => {
+  const expectedActions = [
+    {
+      type: USER_LOGOUT,
+    },
+  ];
+
+  store.dispatch(loginActions.logoutRequest());
+  expect(store.getActions()).toEqual(expectedActions);
 });
