@@ -41,10 +41,6 @@ function TopicCards(props) {
       dispatch(listPosts(skip, 10));
     }, 1000);
   }, [dispatch, skip]);
-  const deleteHandler = (id) => {
-    console.log(id);
-    dispatch(deletePost(id));
-  };
 
   return (
     <div>
@@ -86,15 +82,7 @@ function TopicCards(props) {
                       title={item.title}
                       description={item.body}
                       id={item._id}
-                      date={item.createdAt.slice(0, 10)}
-                    />
-                    <RoundedBorderBtn
-                      btnText="Delete"
-                      type="delete"
-                      onClick={() => {
-                        deleteHandler(item._id);
-                      }}
-                      className={classes.btn}
+                      date={item.createdAt}
                     />
                   </div>
                 ))}

@@ -5,6 +5,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ReportIcon from "@mui/icons-material/Report";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   Avatar,
   Typography,
@@ -13,9 +15,13 @@ import {
   CardHeader,
   CardActions,
 } from "@material-ui/core";
+import { deletePost } from "../../../Services/deletePost";
+import { useHistory } from "react-router";
+
 function TopicComponent({ post, author, comments, userInfo, likes }) {
   const [liked, setLiked] = useState("white");
-
+  const dispatch = useDispatch();
+  let history = useHistory();
   useEffect(() => {
     const userliked = likes.filter((like) => like._id === userInfo._id);
     if (userliked.length !== 0) {
@@ -24,6 +30,11 @@ function TopicComponent({ post, author, comments, userInfo, likes }) {
       setLiked("gray");
     }
   }, []);
+  const deleteHandler = (id) => {
+    console.log(id);
+    dispatch(deletePost(id));
+    history.push("/home");
+  };
   console.log(liked);
   return (
     <div>
@@ -38,8 +49,9 @@ function TopicComponent({ post, author, comments, userInfo, likes }) {
                     onClick={() => console.log("edit")}
                     cursor="pointer"
                   />
+
                   <DeleteIcon
-                    onClick={() => console.log("delete")}
+                    onClick={() => deleteHandler(post._id)}
                     cursor="pointer"
                   />
                 </>
