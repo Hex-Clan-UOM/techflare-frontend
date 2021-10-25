@@ -1,5 +1,9 @@
 import axios from "axios";
-import { deletePostRequest } from "../Actions/deletePostAction";
+import {
+  deletePostFail,
+  deletePostRequest,
+  deletePostSuccess,
+} from "../Actions/deletePostAction";
 
 export const deletePost = (id) => async (dispatch) => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -14,25 +18,13 @@ export const deletePost = (id) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.get(
+    const { data } = await axios.delete(
       `${process.env.REACT_APP_URL}/post/${id}`,
 
       config
     );
-    dispatch({
-      type: PRODUCT_DELETE_SUCCESS,
-    });
+    dispatch(deletePostSuccess());
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    if (message === "Not authorized, token failed") {
-      dispatch(logout());
-    }
-    dispatch({
-      type: PRODUCT_DELETE_FAIL,
-      payload: message,
-    });
+    dispatch(deletePostFail(error));
   }
 };
