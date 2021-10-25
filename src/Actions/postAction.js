@@ -57,7 +57,8 @@ export const postSuccess = (data) => {
     type: POST_SUCCESS,
     payload: data.post,
     payload1: data.post.author,
-    payload2: data.comments,
+    payload2: data.post.comments,
+    payload3: data.post.likes,
   };
 };
 
