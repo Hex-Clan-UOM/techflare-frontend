@@ -8,6 +8,8 @@ import { listFilteredPosts, listPosts } from "../../../Services/fetchPosts";
 import Pagination from "@mui/material/Pagination";
 import FilteredTopicCards from "./FilteredTopicCards/FilteredTopicCards";
 import useStyles from "./style";
+import RoundedBorderBtn from "../../../Components/RoundedBorderBtn/RoundedBorderBtn";
+import { deletePost } from "../../../Services/deletePost";
 
 function TopicCards(props) {
   const classes = useStyles();
@@ -17,7 +19,8 @@ function TopicCards(props) {
   const filteredPostLists = useSelector((state) => state.fetchFilteredPosts);
 
   const { filteredPosts } = filteredPostLists;
-
+  const postDelete = useSelector((state) => state.deletePost);
+  const { loading: loading1 } = postDelete;
   const [skip, setSkip] = useState(0);
   const [page, setpage] = useState(1);
   const [search, setsearch] = useState(false);
@@ -38,11 +41,17 @@ function TopicCards(props) {
       dispatch(listPosts(skip, 10));
     }, 1000);
   }, [dispatch, skip]);
+  const deleteHandler = (id) => {
+    console.log(id);
+    dispatch(deletePost(id));
+  };
 
   return (
     <div>
       <Container sx={{ mt: 2, mb: 2 }} className={classes.root}>
         {/* Search Bar */}
+        {loading1 && <Spinner loading={loading} size={300} />}
+
         {pageLoading ?? <Spinner loading={loading} size={300} />}
         <SearchBar
           value={value}
@@ -78,6 +87,14 @@ function TopicCards(props) {
                       description={item.body}
                       id={item._id}
                       date={item.createdAt.slice(0, 10)}
+                    />
+                    <RoundedBorderBtn
+                      btnText="Delete"
+                      type="delete"
+                      onClick={() => {
+                        deleteHandler(item._id);
+                      }}
+                      className={classes.btn}
                     />
                   </div>
                 ))}

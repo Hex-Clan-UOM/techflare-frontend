@@ -20,11 +20,12 @@ export const deletePost = (id) => async (dispatch) => {
 
     const { data } = await axios.delete(
       `${process.env.REACT_APP_URL}/post/${id}`,
-
       config
     );
+    console.log(data);
     dispatch(deletePostSuccess());
   } catch (error) {
     dispatch(deletePostFail(error));
+    console.log(error);
   }
 };
