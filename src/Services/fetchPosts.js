@@ -72,7 +72,7 @@ export const postDetails = (id) => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/post/${id}`,
+      `${process.env.REACT_APP_URL}/posts/${id}`,
 
       config
     );
