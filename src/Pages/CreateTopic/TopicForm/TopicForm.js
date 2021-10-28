@@ -13,7 +13,7 @@ function TopicForm() {
   const [topic, settopic] = useState("");
   const [text, settext] = useState("");
   const [image, setImage] = useState("");
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState([]);
   const uploadImage = () => {
     const data = new FormData();
     console.log(data);
@@ -26,7 +26,7 @@ function TopicForm() {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        setUrl(data.url);
+        setUrl([...url, data.url]);
       })
       .catch((err) => console.log(err));
   };
@@ -106,7 +106,9 @@ function TopicForm() {
             />
           </Grid>
         </Grid>
-        <img src={url} />
+        {url.map((u) => (
+          <img src={u} height="100" width="100" />
+        ))}
       </form>
     </div>
   );
