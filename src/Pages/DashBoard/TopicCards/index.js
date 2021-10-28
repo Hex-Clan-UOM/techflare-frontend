@@ -25,7 +25,7 @@ function TopicCards(props) {
   const [skip, setSkip] = useState(0);
   const [page, setpage] = useState(1);
   const [search, setsearch] = useState(false);
-  const [value, setValue] = useState();
+
   const [pageLoading, setpageLoading] = useState(false);
   const handlePageChange = (event, value) => {
     setpageLoading(true);
@@ -50,18 +50,6 @@ function TopicCards(props) {
         {loading1 && <Spinner loading={loading} size={300} />}
 
         {pageLoading ?? <Spinner loading={loading} size={300} />}
-        <SearchBar
-          value={value}
-          onChange={(newValue) => setValue(newValue)}
-          onRequestSearch={() => {
-            dispatch(listFilteredPosts(value, 0, 10));
-            // setsearch(true);
-            history.push({
-              pathname: "/filtered",
-            });
-          }}
-          className={classes.search}
-        />
 
         {/* Topic Lists Normal/Filtered */}
 

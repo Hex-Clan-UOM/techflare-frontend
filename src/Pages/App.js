@@ -8,16 +8,14 @@ import CreateTopic from "./CreateTopic/index";
 import Profile from "./Profile/index";
 import Navbar from "../Components/NavBar/index";
 import { useSelector } from "react-redux";
-import Filtered from "./FilteredTopic/FilteredTopicCards/FilteredTopicCards";
+import Filtered from "./FilteredTopic/index";
 import EditTopic from "./EditTopic/index";
 function App() {
   return (
     <>
       <CssBaseline />
-
       <Switch>
         <Route path="/" exact component={LoginPage} />
-
         <ProtectedRoute path="/home" component={DashBoard} />
         <ProtectedRoute path="/detailed/:id" component={DetailedScreen} />
         <ProtectedRoute path="/createtopic" component={CreateTopic} />
