@@ -15,6 +15,7 @@ import {
   Card,
   CardHeader,
 } from "@material-ui/core";
+import { Grid, Paper } from "@mui/material";
 function Comment({ comment, userInfo }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -28,7 +29,7 @@ function Comment({ comment, userInfo }) {
 
   return (
     <div>
-      <Card key={comment._id}>
+      {/* <Card key={comment._id}>
         <CardHeader
           avatar={<Avatar src={comment.author.avatar} />}
           action={
@@ -42,7 +43,31 @@ function Comment({ comment, userInfo }) {
         <CardContent>
           <Typography paragraph>{comment.body}</Typography>
         </CardContent>
-      </Card>
+      </Card> */}
+      <Paper
+        style={{
+          paddingTop: "6px",
+          paddingLeft: "5px",
+
+          marginTop: "2px",
+        }}
+        elevation="8"
+      >
+        <Grid container wrap="nowrap" spacing={2} key={comment._id}>
+          <Grid item>
+            <Avatar alt="avatar" src={comment.author.avatar} />
+          </Grid>
+          <Grid justifyContent="left" item xs zeroMinWidth>
+            <h4 style={{ margin: 0, textAlign: "left" }}>
+              {comment.author.firstName}
+            </h4>
+            <p style={{ textAlign: "left" }}>{comment.body}</p>
+            <p style={{ textAlign: "left", color: "gray" }}>
+              {comment.createdAt.slice(0, 10)}
+            </p>
+          </Grid>
+        </Grid>
+      </Paper>
 
       <Menu
         anchorEl={anchorEl}
