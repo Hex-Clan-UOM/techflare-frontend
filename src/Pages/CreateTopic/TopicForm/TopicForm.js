@@ -14,10 +14,10 @@ function TopicForm() {
   const [text, settext] = useState("");
   const [image, setImage] = useState("");
   const [url, setUrl] = useState([]);
-  const uploadImage = () => {
+  const uploadImage = (e) => {
     const data = new FormData();
     console.log(data);
-    data.append("file", image);
+    data.append("file", e.target.files[0]);
     data.append("upload_preset", "techflare");
     data.append("cloud_name", "hexclan");
     fetch("  	https://api.cloudinary.com/v1_1/hexclan/image/upload", {
@@ -39,7 +39,7 @@ function TopicForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost(topic, text));
+    dispatch(createPost(topic, text, url));
 
     history.push("/home");
   };
@@ -77,16 +77,10 @@ function TopicForm() {
           <input
             type="file"
             onChange={(e) => {
-              setImage(e.target.files[0]);
+              uploadImage(e);
             }}
           ></input>
-          <RoundedBorderBtn
-            btnText="Upload"
-            onClick={() => {
-              uploadImage();
-            }}
-            className={classes.btn}
-          />
+
           <Grid item className={classes.grid}>
             <RoundedBorderBtn
               btnText="Cancel"
