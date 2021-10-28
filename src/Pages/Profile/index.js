@@ -28,8 +28,8 @@ function Profile() {
       >
         <Container maxWidth="sm">
           <Avatar
-            src={userInfo.Avatar}
-            sx={{ width: 56, height: 56, margin: "auto" }}
+            src={userInfo.avatar}
+            sx={{ width: 80, height: 80, margin: "auto" }}
           />
 
           <Typography

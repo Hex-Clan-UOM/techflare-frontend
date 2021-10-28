@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -6,13 +6,14 @@ import Menu from "@mui/material/Menu";
 import Avatar from "@mui/material/Avatar";
 import LogoutBtn from "./LogoutBtn";
 import { IconButton, MenuItem, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RoundedBorderBtn from "../RoundedBorderBtn/RoundedBorderBtn";
 import useStyles from "./style";
 import { useHistory } from "react-router";
 import logo from "../../Assets/navbarlogo.png";
 import { Button } from "@material-ui/core";
-
+import SearchBar from "material-ui-search-bar";
+import { listFilteredPosts } from "../../Services/fetchPosts";
 const Index = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -27,7 +28,8 @@ const Index = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-
+  const [value, setValue] = useState();
+  const dispatch = useDispatch();
   const menuId = "menu";
 
   const renderMenu = (
@@ -83,7 +85,7 @@ const Index = () => {
             Write Out
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { md: "flex" } }}>
+          {/* <Box sx={{ display: { md: "flex" } }}>
             <Button
               color="inherit"
               variant="outlined"
@@ -93,10 +95,21 @@ const Index = () => {
             >
               Create Topics
             </Button>
-          </Box>
+          </Box> */}
           {/* <LogoutBtn /> */}
           <Box sx={{ flexGrow: 1 }} />
-
+          <SearchBar
+            value={value}
+            onChange={(newValue) => setValue(newValue)}
+            onRequestSearch={() => {
+              dispatch(listFilteredPosts(value, 0, 10));
+              // setsearch(true);
+              history.push({
+                pathname: "/filtered",
+              });
+            }}
+            className={classes.search}
+          />
           {userInfo && (
             <Typography
               variant="h5"
