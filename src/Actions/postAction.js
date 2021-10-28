@@ -59,6 +59,7 @@ export const postSuccess = (data) => {
     payload1: data.post.author,
     payload2: data.post.comments,
     payload3: data.post.likes,
+    payload4: data.post.images,
   };
 };
 
