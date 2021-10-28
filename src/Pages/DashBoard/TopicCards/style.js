@@ -10,12 +10,9 @@ const useStyles = makeStyles(() => ({
   },
   pagination: {
     margin: "auto",
-    // position: "absolute",
-    bottom: 0,
-
-    // marginTop: 20,
-
-    // marginBottom: 15,
+    padding: "1px",
+    position: "absolute",
+    bottom: "1px",
   },
   root: {
     minHeight: "100vh",

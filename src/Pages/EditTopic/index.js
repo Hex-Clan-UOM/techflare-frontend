@@ -1,9 +1,8 @@
 import { Grid, Paper } from "@material-ui/core";
 import React from "react";
 import NavBar from "../../Components/NavBar/index";
-import TopicForm from "./TopicForm/TopicForm";
+import TopicForm from "./EditableTopicForm/EditableTopicForm";
 import { makeStyles } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -18,12 +17,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 function CreateTopic() {
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
   const classes = useStyles();
   return (
     <div>
-      {userInfo !== null && <NavBar />}
+      <NavBar />
       <Grid className={classes.grid}>
         <Paper className={classes.paper}>
           <TopicForm />

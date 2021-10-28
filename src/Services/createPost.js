@@ -5,7 +5,7 @@ import {
   createPostSuccess,
 } from "../Actions/createPostAction";
 
-export const createPost = (title, body) => async (dispatch) => {
+export const createPost = (title, body, images) => async (dispatch) => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   try {
     dispatch(createPostRequest());
@@ -19,7 +19,7 @@ export const createPost = (title, body) => async (dispatch) => {
 
     const { data } = await axios.post(
       `${process.env.REACT_APP_URL}/post`,
-      { title, body },
+      { title, body, images },
       config
     );
 

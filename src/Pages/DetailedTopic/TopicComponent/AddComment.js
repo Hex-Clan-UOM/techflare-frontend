@@ -3,6 +3,7 @@ import RoundedBorderBtn from "../../../Components/RoundedBorderBtn/RoundedBorder
 import useStyles from "./style";
 import { Grid, Typography, CardContent, Card } from "@material-ui/core";
 import { TextField } from "@mui/material";
+import { Box } from "@mui/system";
 function AddComment({ newcomment, setNewcomment, handleSubmitComment }) {
   const classes = useStyles();
 
@@ -17,20 +18,22 @@ function AddComment({ newcomment, setNewcomment, handleSubmitComment }) {
             value={newcomment}
             onChange={(e) => setNewcomment(e.target.value)}
           />
-          <Grid item className={classes.grid}>
-            <RoundedBorderBtn
-              btnText="Cancel"
-              onClick={() => {
-                setNewcomment("");
-              }}
-              className={classes.btn}
-            />
-            <RoundedBorderBtn
-              btnText="Submit"
-              onClick={handleSubmitComment}
-              className={classes.btn}
-            />
-          </Grid>
+          <Box mt={1} pt={1}>
+            <Grid container justify="center">
+              <RoundedBorderBtn
+                btnText="Clear"
+                onClick={() => {
+                  setNewcomment("");
+                }}
+                className={classes.btn}
+              />
+              <RoundedBorderBtn
+                btnText="Submit"
+                onClick={handleSubmitComment}
+                className={classes.btn}
+              />
+            </Grid>
+          </Box>
         </CardContent>
       </Card>
     </div>

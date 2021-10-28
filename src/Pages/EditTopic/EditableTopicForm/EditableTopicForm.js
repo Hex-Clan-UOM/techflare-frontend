@@ -5,19 +5,22 @@ import useStyles from "./style";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../../Services/createPost";
+import { PostAddTwoTone } from "@material-ui/icons";
 
-function TopicForm() {
+function TopicForm(currentTopic, currentDescription, currentId) {
   const dispatch = useDispatch();
+  const specificPost = useSelector((state) => state.fetchSpecificPost);
+  const { loading, post } = specificPost;
   const classes = useStyles();
   let history = useHistory();
   const [topic, settopic] = useState("");
   const [text, settext] = useState("");
   const [image, setImage] = useState("");
-  const [url, setUrl] = useState([]);
-  const uploadImage = (e) => {
+  const [url, setUrl] = useState("");
+  const uploadImage = () => {
     const data = new FormData();
     console.log(data);
-    data.append("file", e.target.files[0]);
+    data.append("file", image);
     data.append("upload_preset", "techflare");
     data.append("cloud_name", "hexclan");
     fetch("  	https://api.cloudinary.com/v1_1/hexclan/image/upload", {
@@ -26,7 +29,7 @@ function TopicForm() {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        setUrl([...url, data.url]);
+        setUrl(data.url);
       })
       .catch((err) => console.log(err));
   };
@@ -39,7 +42,7 @@ function TopicForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost(topic, text, url));
+    dispatch(createPost(topic, text));
 
     history.push("/home");
   };
@@ -52,7 +55,7 @@ function TopicForm() {
             className={classes.caption}
             marginBottom="10px"
           >
-            Create Your Topic Here!
+            Edit Your Topic Here!
           </Typography>
           <Grid item xs={12} className={classes.grid}>
             <TextField
@@ -61,6 +64,7 @@ function TopicForm() {
               className={classes.field}
               onChange={handleTopicChange}
               required
+              defaultValue={post.title}
             />
 
             <TextField
@@ -72,15 +76,22 @@ function TopicForm() {
               multiline
               onChange={handleTextChange}
               required
+              defaultValue={post.body}
             />
           </Grid>
           <input
             type="file"
             onChange={(e) => {
-              uploadImage(e);
+              setImage(e.target.files[0]);
             }}
           ></input>
-
+          <RoundedBorderBtn
+            btnText="Upload"
+            onClick={() => {
+              uploadImage();
+            }}
+            className={classes.btn}
+          />
           <Grid item className={classes.grid}>
             <RoundedBorderBtn
               btnText="Cancel"
@@ -100,9 +111,7 @@ function TopicForm() {
             />
           </Grid>
         </Grid>
-        {url.map((u) => (
-          <img src={u} height="100" width="100" />
-        ))}
+        <img src={url} />
       </form>
     </div>
   );

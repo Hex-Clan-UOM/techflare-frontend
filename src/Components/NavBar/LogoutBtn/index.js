@@ -23,15 +23,11 @@ function LogoutBtn() {
     <GoogleLogout
       clientId={process.env.REACT_APP_CLIENT_ID}
       onLogoutSuccess={handleLogout}
+      buttonText="Log Out"
       render={(renderProps) => (
-        // <Button
-        //   onClick={renderProps.onClick}
-        //   className={classes.btnstyle}
-        //   variant="contained"
-        // >
-        //   <Typography>Log Out</Typography>
-        // </Button>
-        <RoundedBorderBtn btnText="Log out" onClick={renderProps.onClick} />
+        <Button onClick={renderProps.onClick} disabled={renderProps.disabled}>
+          Log Out
+        </Button>
       )}
     />
   );

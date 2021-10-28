@@ -12,6 +12,7 @@ import Comment from "./TopicComponent/Comment";
 import { Typography } from "@material-ui/core";
 import AddComment from "./TopicComponent/AddComment";
 import { createComment } from "../../Services/createComment";
+import { Box } from "@mui/system";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -29,7 +30,7 @@ const Index = ({ match }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.fetchSpecificPost);
-  const { loading, error, post, comments, author, likes } = posts;
+  const { loading, error, post, comments, author, likes, images } = posts;
   const [newcomment, setNewcomment] = React.useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -55,18 +56,21 @@ const Index = ({ match }) => {
   let history = useHistory();
   return (
     <div>
-      <NavBar />
+      {userInfo !== null && <NavBar />}
       {loading ? (
         <Spinner loading={loading} size={300} />
       ) : (
         <Container className={classes.root}>
-          <RoundedBorderBtn
-            btnText="Go Back"
-            onClick={() => {
-              history.goBack();
-            }}
-            className={classes.btn}
-          />
+          <Box m={1} pt={1}>
+            <RoundedBorderBtn
+              btnText="Go Back"
+              onClick={() => {
+                history.goBack();
+              }}
+              className={classes.btn}
+            />
+          </Box>
+
           <TopicComponent
             post={post}
             author={author}
@@ -74,7 +78,9 @@ const Index = ({ match }) => {
             className={classes.post}
             userInfo={userInfo}
             likes={likes}
+            images={images}
           />
+
           <AddComment
             handleSubmitComment={handleSubmitComment}
             newcomment={newcomment}
