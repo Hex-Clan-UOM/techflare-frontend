@@ -12,6 +12,7 @@ import Comment from "./TopicComponent/Comment";
 import { Typography } from "@material-ui/core";
 import AddComment from "./TopicComponent/AddComment";
 import { createComment } from "../../Services/createComment";
+import { Box } from "@mui/system";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -55,18 +56,21 @@ const Index = ({ match }) => {
   let history = useHistory();
   return (
     <div>
-      <NavBar />
+      {userInfo !== null && <NavBar />}
       {loading ? (
         <Spinner loading={loading} size={300} />
       ) : (
         <Container className={classes.root}>
-          <RoundedBorderBtn
-            btnText="Go Back"
-            onClick={() => {
-              history.goBack();
-            }}
-            className={classes.btn}
-          />
+          <Box m={1} pt={1}>
+            <RoundedBorderBtn
+              btnText="Go Back"
+              onClick={() => {
+                history.goBack();
+              }}
+              className={classes.btn}
+            />
+          </Box>
+
           <TopicComponent
             post={post}
             author={author}
@@ -75,6 +79,7 @@ const Index = ({ match }) => {
             userInfo={userInfo}
             likes={likes}
           />
+
           <AddComment
             handleSubmitComment={handleSubmitComment}
             newcomment={newcomment}

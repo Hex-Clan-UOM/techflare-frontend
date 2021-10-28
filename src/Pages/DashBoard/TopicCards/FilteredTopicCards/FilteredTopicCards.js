@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import useStyles from "./style";
 import TopicCard from "../TopicCard/TopicCard";
 import Spinner from "../../../../Components/Spinner/Spinner";
+import { Box } from "@mui/system";
 
 function FilteredTopicCards({ filteredPosts, filterLoading }) {
   const [skip, setSkip] = useState(0);
@@ -35,16 +36,21 @@ function FilteredTopicCards({ filteredPosts, filterLoading }) {
                   />
                 </div>
               ))}
-              <Pagination
-                count={parseInt(filteredPosts.length / 10) || 0}
-                onChange={handlePageChange}
-                siblingCount={4}
-                page={page}
-                boundaryCount={3}
-                variant="outlined"
-                shape="rounded"
-                className={classes.pagination}
-              />
+              <Box
+                sx={{ bgcolor: "background.paper", p: 1 }}
+                component="footer"
+              >
+                <Pagination
+                  count={parseInt(filteredPosts.length / 10) || 0}
+                  onChange={handlePageChange}
+                  siblingCount={4}
+                  page={page}
+                  boundaryCount={3}
+                  variant="outlined"
+                  shape="rounded"
+                  className={classes.pagination}
+                />
+              </Box>
             </div>
           ) : (
             <div>

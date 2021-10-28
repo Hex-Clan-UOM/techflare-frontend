@@ -8,8 +8,8 @@ function DashBoard() {
   const { userInfo } = userLogin;
   return (
     <>
-      {userInfo !== null && <Navbar />}
       {/* <Navbar /> */}
+      {userInfo !== null && <Navbar />}
       <TopicCards />
     </>
   );

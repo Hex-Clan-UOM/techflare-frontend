@@ -10,6 +10,7 @@ import FilteredTopicCards from "./FilteredTopicCards/FilteredTopicCards";
 import useStyles from "./style";
 import RoundedBorderBtn from "../../../Components/RoundedBorderBtn/RoundedBorderBtn";
 import { deletePost } from "../../../Services/deletePost";
+import { Box } from "@mui/system";
 
 function TopicCards(props) {
   const classes = useStyles();
@@ -86,17 +87,21 @@ function TopicCards(props) {
                     />
                   </div>
                 ))}
-
-                <Pagination
-                  count={Math.ceil(number / 10) || 0}
-                  onChange={handlePageChange}
-                  siblingCount={4}
-                  page={page}
-                  boundaryCount={3}
-                  variant="outlined"
-                  shape="rounded"
-                  className={classes.pagination}
-                />
+                <Box
+                  sx={{ bgcolor: "background.paper", p: 2 }}
+                  component="footer"
+                >
+                  <Pagination
+                    count={Math.ceil(number / 10) || 0}
+                    onChange={handlePageChange}
+                    siblingCount={4}
+                    page={page}
+                    boundaryCount={3}
+                    variant="outlined"
+                    shape="rounded"
+                    className={classes.pagination}
+                  />
+                </Box>
               </div>
             )}
 
