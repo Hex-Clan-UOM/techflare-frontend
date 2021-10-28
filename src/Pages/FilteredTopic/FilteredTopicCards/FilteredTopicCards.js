@@ -1,21 +1,28 @@
 import { Pagination, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useStyles from "./style";
-import TopicCard from "../TopicCard/TopicCard";
-import Spinner from "../../../../Components/Spinner/Spinner";
-import { Box } from "@mui/system";
+import TopicCard from "../../../Components/TopicCard/TopicCard";
 
-function FilteredTopicCards({ filteredPosts, filterLoading }) {
+import Spinner from "../../../Components/Spinner/Spinner";
+import { Box } from "@mui/system";
+import { useSelector } from "react-redux";
+
+function FilteredTopicCards() {
   const [skip, setSkip] = useState(0);
   const [page, setpage] = useState(1);
+
+  const filteredPostLists = useSelector((state) => state.fetchFilteredPosts);
+  const { loading, filteredPosts } = filteredPostLists;
   const handlePageChange = (event, value) => {
     setSkip((value - 1) * 10);
     setpage(value);
   };
+
   const classes = useStyles();
+
   return (
     <div>
-      {filterLoading ? (
+      {loading ? (
         <Spinner loading={true} />
       ) : (
         <div>

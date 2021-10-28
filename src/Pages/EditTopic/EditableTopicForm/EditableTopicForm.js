@@ -5,9 +5,12 @@ import useStyles from "./style";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../../Services/createPost";
+import { PostAddTwoTone } from "@material-ui/icons";
 
 function TopicForm(currentTopic, currentDescription, currentId) {
   const dispatch = useDispatch();
+  const specificPost = useSelector((state) => state.fetchSpecificPost);
+  const { loading, post } = specificPost;
   const classes = useStyles();
   let history = useHistory();
   const [topic, settopic] = useState("");
@@ -61,7 +64,7 @@ function TopicForm(currentTopic, currentDescription, currentId) {
               className={classes.field}
               onChange={handleTopicChange}
               required
-              defaultValue={"Title"}
+              defaultValue={post.title}
             />
 
             <TextField
@@ -73,7 +76,7 @@ function TopicForm(currentTopic, currentDescription, currentId) {
               multiline
               onChange={handleTextChange}
               required
-              defaultValue={"Description"}
+              defaultValue={post.body}
             />
           </Grid>
           <input

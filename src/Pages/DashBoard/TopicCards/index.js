@@ -1,25 +1,25 @@
 import { Container } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Spinner from "../../../Components/Spinner/Spinner";
-import TopicCard from "./TopicCard/TopicCard";
+import TopicCard from "../../../Components/TopicCard/TopicCard";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "material-ui-search-bar";
 import { listFilteredPosts, listPosts } from "../../../Services/fetchPosts";
 import Pagination from "@mui/material/Pagination";
-import FilteredTopicCards from "./FilteredTopicCards/FilteredTopicCards";
+import FilteredTopicCards from "../../FilteredTopic/FilteredTopicCards/FilteredTopicCards";
 import useStyles from "./style";
 import RoundedBorderBtn from "../../../Components/RoundedBorderBtn/RoundedBorderBtn";
 import { deletePost } from "../../../Services/deletePost";
 import { Box } from "@mui/system";
+import { useHistory } from "react-router";
 
 function TopicCards(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const postLists = useSelector((state) => state.fetchPost);
   const { loading, error, posts, number } = postLists;
-  const filteredPostLists = useSelector((state) => state.fetchFilteredPosts);
 
-  const { filteredPosts } = filteredPostLists;
+  // const { filteredPosts } = filteredPostLists;
   const postDelete = useSelector((state) => state.deletePost);
   const { loading: loading1 } = postDelete;
   const [skip, setSkip] = useState(0);
@@ -34,15 +34,15 @@ function TopicCards(props) {
     setpageLoading(false);
   };
   const sortedPosts = posts.slice().sort((a, b) => b.createdAt - a.createdAt);
-  const sortedFilteredPosts = filteredPosts
-    .slice()
-    .sort((a, b) => b.createdAt - a.createdAt);
+  // const sortedFilteredPosts = filteredPosts
+  //   .slice()
+  //   .sort((a, b) => b.createdAt - a.createdAt);
   useEffect(() => {
     setTimeout(() => {
       dispatch(listPosts(skip, 10));
     }, 1000);
   }, [dispatch, skip]);
-
+  const history = useHistory();
   return (
     <div>
       <Container sx={{ mt: 2, mb: 2 }} className={classes.root}>
@@ -55,7 +55,10 @@ function TopicCards(props) {
           onChange={(newValue) => setValue(newValue)}
           onRequestSearch={() => {
             dispatch(listFilteredPosts(value, 0, 10));
-            setsearch(true);
+            // setsearch(true);
+            history.push({
+              pathname: "/filtered",
+            });
           }}
           className={classes.search}
         />
@@ -66,44 +69,37 @@ function TopicCards(props) {
           <Spinner loading={loading} size={300} />
         ) : (
           <div>
-            {search ? (
-              <div>
-                <FilteredTopicCards
-                  filteredPosts={sortedFilteredPosts}
-                  filterLoading={sortedFilteredPosts.loading}
+            {/* <div>
+              <FilteredTopicCards
+                filteredPosts={sortedFilteredPosts}
+                filterLoading={sortedFilteredPosts.loading}
+              />
+            </div> */}
+
+            {sortedPosts.map((item) => (
+              <div key={item._id}>
+                <TopicCard
+                  avatar={item.author.avatar}
+                  author={item.author.firstName}
+                  title={item.title}
+                  description={item.body}
+                  id={item._id}
+                  date={item.createdAt}
                 />
               </div>
-            ) : (
-              <div>
-                {sortedPosts.map((item) => (
-                  <div key={item._id}>
-                    <TopicCard
-                      avatar={item.author.avatar}
-                      author={item.author.firstName}
-                      title={item.title}
-                      description={item.body}
-                      id={item._id}
-                      date={item.createdAt}
-                    />
-                  </div>
-                ))}
-                <Box
-                  sx={{ bgcolor: "background.paper", p: 2 }}
-                  component="footer"
-                >
-                  <Pagination
-                    count={Math.ceil(number / 10) || 0}
-                    onChange={handlePageChange}
-                    siblingCount={4}
-                    page={page}
-                    boundaryCount={3}
-                    variant="outlined"
-                    shape="rounded"
-                    className={classes.pagination}
-                  />
-                </Box>
-              </div>
-            )}
+            ))}
+            <Box sx={{ bgcolor: "background.paper", p: 2 }} component="footer">
+              <Pagination
+                count={Math.ceil(number / 10) || 0}
+                onChange={handlePageChange}
+                siblingCount={4}
+                page={page}
+                boundaryCount={3}
+                variant="outlined"
+                shape="rounded"
+                className={classes.pagination}
+              />
+            </Box>
 
             {/* Pagination */}
           </div>

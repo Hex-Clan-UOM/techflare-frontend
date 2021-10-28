@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useHistory } from "react-router";
-import RoundedBorderBtn from "../../../../Components/RoundedBorderBtn/RoundedBorderBtn";
+import RoundedBorderBtn from "../RoundedBorderBtn/RoundedBorderBtn";
 import useStyles from "./style";
 
 function TopicCard({ title, author, avatar, description, date, id }) {
