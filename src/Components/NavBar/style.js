@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
+    // width: "100%",
   },
 }));
 export default useStyles;
