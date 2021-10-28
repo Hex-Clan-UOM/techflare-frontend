@@ -30,7 +30,7 @@ const Index = ({ match }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.fetchSpecificPost);
-  const { loading, error, post, comments, author, likes } = posts;
+  const { loading, error, post, comments, author, likes, images } = posts;
   const [newcomment, setNewcomment] = React.useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -78,6 +78,7 @@ const Index = ({ match }) => {
             className={classes.post}
             userInfo={userInfo}
             likes={likes}
+            images={images}
           />
 
           <AddComment

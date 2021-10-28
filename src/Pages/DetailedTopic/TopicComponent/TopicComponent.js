@@ -21,7 +21,7 @@ import DeleteModal from "../../../Components/ConfirmationModa;/DeleteModal";
 import { likePost, unlikePost } from "../../../Services/likePost";
 import { postDetails } from "./../../../Services/fetchPosts";
 
-function TopicComponent({ post, author, comments, userInfo, likes }) {
+function TopicComponent({ post, author, comments, userInfo, likes, images }) {
   const [allLikes, setAllLikes] = useState(likes);
   const [liked, setLiked] = useState(false);
   const [likeColor, setLikeColor] = useState("white");
@@ -29,6 +29,7 @@ function TopicComponent({ post, author, comments, userInfo, likes }) {
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const dispatch = useDispatch();
   let history = useHistory();
+
   useEffect(() => {
     const userliked = likes.filter((like) => like._id === userInfo._id);
     if (userliked.length !== 0) {
@@ -106,6 +107,9 @@ function TopicComponent({ post, author, comments, userInfo, likes }) {
           <Typography variant="body2" color="text.secondary">
             {post.body}
           </Typography>
+          {images.map((u) => (
+            <img src={u} height="100" width="100" />
+          ))}
         </CardContent>
         <CardActions disableSpacing>
           {allLikes.length}
