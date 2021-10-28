@@ -67,6 +67,7 @@ function TopicComponent({ post, author, comments, userInfo, likes }) {
       setLiked(false);
     }
   };
+
   return (
     <div>
       <Card>
@@ -77,7 +78,7 @@ function TopicComponent({ post, author, comments, userInfo, likes }) {
               {userInfo._id === author._id && (
                 <>
                   <EditIcon
-                    onClick={() => console.log("edit")}
+                    onClick={() => history.push("/editTopic")}
                     cursor="pointer"
                   />
 
