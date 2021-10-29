@@ -108,7 +108,7 @@ function TopicComponent({ post, author, comments, userInfo, likes, images }) {
             {post.body}
           </Typography>
           {images.map((u) => (
-            <img src={u} height="100" width="100" />
+            <img src={u} height="100" width="100" style={{ margin: "5px" }} />
           ))}
         </CardContent>
         <CardActions disableSpacing>

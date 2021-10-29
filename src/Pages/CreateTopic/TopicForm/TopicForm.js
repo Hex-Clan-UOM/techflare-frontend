@@ -5,6 +5,7 @@ import useStyles from "./style";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../../Services/createPost";
+import ImageLoader from "../../../Components/imageLoader/Loader";
 
 function TopicForm() {
   const dispatch = useDispatch();
@@ -14,9 +15,12 @@ function TopicForm() {
   const [text, settext] = useState("");
   const [image, setImage] = useState("");
   const [url, setUrl] = useState([]);
+  const [loadImage, setLoadImage] = useState(false);
+
   const uploadImage = (e) => {
     const data = new FormData();
     console.log(data);
+    setLoadImage(true);
     data.append("file", e.target.files[0]);
     data.append("upload_preset", "techflare");
     data.append("cloud_name", "hexclan");
@@ -27,6 +31,7 @@ function TopicForm() {
       .then((resp) => resp.json())
       .then((data) => {
         setUrl([...url, data.url]);
+        setLoadImage(false);
       })
       .catch((err) => console.log(err));
   };
@@ -42,6 +47,11 @@ function TopicForm() {
     dispatch(createPost(topic, text, url));
 
     history.push("/home");
+  };
+
+  const removeImage = (image) => {
+    const newImages = url.filter((u) => u !== image);
+    setUrl(newImages);
   };
   return (
     <div>
@@ -100,8 +110,12 @@ function TopicForm() {
             />
           </Grid>
         </Grid>
+        <ImageLoader loading={loadImage} size="50px" />
         {url.map((u) => (
-          <img src={u} height="100" width="100" />
+          <>
+            <img src={u} height="100" width="100" />
+            <button onClick={() => removeImage(u)}>x</button>
+          </>
         ))}
       </form>
     </div>

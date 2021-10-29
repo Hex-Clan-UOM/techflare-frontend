@@ -6,20 +6,22 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePost } from "../../../Services/updatePost";
 import { PostAddTwoTone } from "@material-ui/icons";
+import ImageLoader from "../../../Components/imageLoader/Loader";
 
-function TopicForm(currentTopic, currentDescription, currentId) {
+function TopicForm() {
   const dispatch = useDispatch();
   const specificPost = useSelector((state) => state.fetchSpecificPost);
   const { loading, post } = specificPost;
   const classes = useStyles();
   let history = useHistory();
-  const [topic, settopic] = useState("");
-  const [text, settext] = useState("");
-  const [image, setImage] = useState("");
+  const [topic, settopic] = useState(post.title);
+  const [text, settext] = useState(post.body);
   const [url, setUrl] = useState(post.images);
+  const [loadImage, setLoadImage] = useState(false);
+
   const uploadImage = (e) => {
     const data = new FormData();
-    console.log(data);
+    setLoadImage(true);
     data.append("file", e.target.files[0]);
     data.append("upload_preset", "techflare");
     data.append("cloud_name", "hexclan");
@@ -30,6 +32,7 @@ function TopicForm(currentTopic, currentDescription, currentId) {
       .then((resp) => resp.json())
       .then((data) => {
         setUrl([...url, data.url]);
+        setLoadImage(false);
       })
       .catch((err) => console.log(err));
   };
@@ -45,6 +48,11 @@ function TopicForm(currentTopic, currentDescription, currentId) {
     dispatch(updatePost(topic, text, post._id, url));
 
     history.push("/home");
+  };
+
+  const removeImage = (image) => {
+    const newImages = url.filter((u) => u !== image);
+    setUrl(newImages);
   };
   return (
     <div>
@@ -64,7 +72,7 @@ function TopicForm(currentTopic, currentDescription, currentId) {
               className={classes.field}
               onChange={handleTopicChange}
               required
-              defaultValue={post.title}
+              defaultValue={topic}
             />
 
             <TextField
@@ -76,7 +84,7 @@ function TopicForm(currentTopic, currentDescription, currentId) {
               multiline
               onChange={handleTextChange}
               required
-              defaultValue={post.body}
+              defaultValue={text}
             />
           </Grid>
           <input
@@ -105,8 +113,13 @@ function TopicForm(currentTopic, currentDescription, currentId) {
             />
           </Grid>
         </Grid>
+
+        <ImageLoader loading={loadImage} size="50px" />
         {url.map((u) => (
-          <img src={u} height="100" width="100" />
+          <>
+            <img src={u} height="100" width="100" />
+            <button onClick={() => removeImage(u)}>x</button>
+          </>
         ))}
       </form>
     </div>
