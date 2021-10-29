@@ -6,8 +6,8 @@ import {
 } from "../Actions/updatePostAction";
 import axios from "axios";
 
-export const updateProduct =
-  (title, body, id) => async (dispatch, getState) => {
+export const updatePost =
+  (title, body, id, images) => async (dispatch, getState) => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
     try {
@@ -21,7 +21,7 @@ export const updateProduct =
       };
       const { data } = await axios.put(
         `${process.env.REACT_APP_URL}/post/${id}`,
-        { title, body },
+        { title, body, images },
         config
       );
 
