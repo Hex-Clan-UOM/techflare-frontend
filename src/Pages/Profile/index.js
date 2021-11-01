@@ -64,7 +64,7 @@ function Profile() {
             >
               Back to Home
             </Button>
-            <Button variant="outlined">My Topics</Button>
+            {/* <Button variant="outlined">My Topics</Button> */}
           </Stack>
         </Container>
       </Box>

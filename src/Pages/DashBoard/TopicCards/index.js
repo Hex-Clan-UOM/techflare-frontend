@@ -72,7 +72,7 @@ function TopicCards(props) {
                   title={item.title}
                   description={item.body}
                   id={item._id}
-                  date={item.createdAt}
+                  date={item.created}
                 />
               </div>
             ))}

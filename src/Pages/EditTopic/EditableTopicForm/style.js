@@ -19,5 +19,8 @@ const useStyles = makeStyles(() => ({
   btn: {
     marginRight: "10px !important",
   },
+  ribbon: {
+    display: "inline-block",
+  },
 }));
 export default useStyles;

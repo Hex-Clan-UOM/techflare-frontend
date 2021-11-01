@@ -113,7 +113,7 @@ const Index = () => {
           {userInfo && (
             <Typography
               variant="h5"
-              sx={{ marginRight: 2 }}
+              sx={{ display: { xs: "none", sm: "block" }, marginRight: 2 }}
               className={classes.txt}
             >
               {userInfo.firstName}

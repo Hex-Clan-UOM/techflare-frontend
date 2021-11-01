@@ -116,10 +116,12 @@ function TopicForm() {
 
         <ImageLoader loading={loadImage} size="50px" />
         {url.map((u) => (
-          <>
+          <div>
             <img src={u} height="100" width="100" />
-            <button onClick={() => removeImage(u)}>x</button>
-          </>
+            <button onClick={() => removeImage(u)} className={classes.ribbon}>
+              x
+            </button>
+          </div>
         ))}
       </form>
     </div>
