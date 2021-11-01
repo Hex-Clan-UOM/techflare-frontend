@@ -93,7 +93,7 @@ function TopicComponent({ post, author, comments, userInfo, likes, images }) {
             </>
           }
           title={author.firstName}
-          subheader={post.createdAt}
+          subheader={post.created}
         />
         <CardContent>
           <Typography
